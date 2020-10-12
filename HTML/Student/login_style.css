@@ -1,0 +1,38 @@
+body{
+    background: rgb(238,75,40);
+    padding: 100px;
+    height: 100%;
+    color: black;
+}
+#login_input{
+    background-color: rgba(255, 255, 255,1);
+    margin: 40px;
+    border-radius: 50px;
+}
+.card{
+    background-color: rgba(000, 0, 0, 0.6);
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 20px;
+}
+.jumbotron{
+    background: url(1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50px;
+}
+h1{
+    background-color: rgba(000, 0, 0, 0.6);
+    padding: 20px;
+    margin: auto;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 50px;
+}
+.btn{
+    background: rgb(238,75,40);
+    margin: auto;
+    border-radius: 50px;
+    color: white;
+}
