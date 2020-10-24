@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Font Awesome File -->
+        <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <title></title>
+    </head>
+    <body>
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
+            <div class="container">
+            	<a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40); font-weight:700;">H.I.M</a>
+            	<button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item" role="presentation">
+                        	<a class="nav-link js-scroll-trigger" href="#teacher" style="color: rgb(0,0,0); font-weight:700;">Teacher login</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                        	<a class="nav-link js-scroll-trigger" href="/login" style="color: rgb(0,0,0); font-weight:700;">Student login</a>
+                        </li>
+                        <li class="nav-item" role="presentation"></li>
+                        <li class="nav-item" role="presentation"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div style="background: url(/img/1.jpg);background-repeat: no-repeat;background-size: cover;border-radius: 50px">
+                        <div class="jumbotron">
+                          <h1 class="display-4" style="text-transform: uppercase;"><%= Teacher_details.Username %></h1>
+                          <hr class="my-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="background: white; border-radius: 50px; padding:35px; margin:20px;">
+                    <h1 style="text-transform: uppercase;">Details</h1>
+                    <hr>
+                    <h2>Email: <%= Teacher_details.Email %></h2>
+                    <h2>Phone: <%= Teacher_details.Phone %></h2>
+                </div>
+            </div>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/bs-init.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+        <script src="/js/creative.js"></script>
+    </body>
+</html>

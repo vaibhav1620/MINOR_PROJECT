@@ -1,0 +1,51 @@
+body{
+    background: rgb(238,75,40);
+    padding: 100px;
+    height: 100%;
+    color: black;
+}
+#stu_login_content{
+    text-align: center;
+}
+#stu_login_heading{
+    text-align: center;
+}
+#jumbo{
+    background: url('D:\MINOR_PROJECT\backend\public\img\1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50px;
+    margin-top: 10px;
+}
+#input_form{
+    background-color: white;
+    padding: 30px;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.jumbotron{
+    background-color: rgba(000, 0, 0, 0.6);
+    margin-top: 25px;
+    color: white;
+    font-weight: 800;
+    border-radius: 50px;
+}
+.card{
+    padding: 20px;
+    border-radius: 50px;
+    margin: 15px;
+}
+.navbar-light .navbar-brand{
+    color: rgb(238,75,40);
+    font-weight: 700;
+}
+h5{
+    padding: 20px;
+    text-align: center;
+}
+.btn{
+    background: rgb(238,75,40);
+    border-radius: 50px;
+    color: white;
+}

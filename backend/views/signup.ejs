@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Font Awesome File -->
+        <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
+            <div class="container">
+            	<a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40);">H.I.M</a>
+            	<button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item" role="presentation">
+                        	<a class="nav-link js-scroll-trigger" href="#teacher" style="color: rgb(0,0,0); font-weight:700;">Teacher login</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                        	<a class="nav-link js-scroll-trigger" href="/login" style="color: rgb(0,0,0); font-weight:700;">Student login</a>
+                        </li>
+                        <li class="nav-item" role="presentation"></li>
+                        <li class="nav-item" role="presentation"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div id="jumbo" class="col-xl" style="background: url(/img/1.jpg);">
+                    <div class="jumbotron jumbotron-fluid">
+                      <div id="jumbo_cont"class="container">
+                        <h1 id="stu_login_heading" class="display-4"><strong>STUDENT SIGNUP</strong></h1>
+                        <p id="stu_login_content" class="lead">Lorem Ips Lorem Ipsum when an uremaining essentially unchanged.</p>
+                      </div>
+                    </div>
+                    <div class="card mb-3 text-center">
+                      <div class="card-body">
+                        <h5 class="card-title">Already have an Account?</h5>
+                        <a href="/login" class="btn btn-lg">LOG IN</a>
+                      </div>
+                    </div>
+                </div>
+                <div id="input_form"class="col-xl">
+                    <h5>ENTER YOUR DETAILS</h5>
+                    <hr class="my-4" style="color:rgb(238,75,40);">
+                    <form class="" action="/Student" method="post">
+                      <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputUseranme">USERNAME</label>
+                              <input type="text" class="form-control" id="inputEmail" placeholder="Username" name="Username">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail">EMAIL</label>
+                              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputPassword">PASSWORD</label>
+                              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputPhone">PHONE NO.</label>
+                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone number" name="Phone">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="studentid">STUDENT ID.</label>
+                              <input type="text" class="form-control" id="studentid" placeholder="Student Id" name="Sid">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="Branch">BRANCH</label>
+                              <div class="">
+                                  <select id="Branch" class="" name="Branch" id="Branch" style="margin-left: 50px;margin-top:10px;">
+                                        <option value="aerospace">Aerospace</option>
+                                        <option value="civil">Civil</option>
+                                        <option value="computerscience">Computer</option>
+                                        <option value="electrical">Electrical</option>
+                                        <option value="electronics">Electronics</option>
+                                        <option value="mechanical">Mechanical</option>
+                                        <option value="mettalurgical">Mettalurgical</option>
+                                        <option value="production">Production</option>
+                                  </select>
+                              </div>
+                            </div>
+                        </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="guardian_name">GUARDIAN NAME</label>
+                              <input type="text" class="form-control" id="guardian_name" placeholder="Guardian Name" name="Guardian_name">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="guardina_phone">GUARDIAN PHONE</label>
+                              <input type="text" class="form-control" id="guardian_phone" placeholder="Guardian Phone" name="Guardian_phone">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                          </div>
+                      <button type="submit" class="btn">SIGN UP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="/js/creative.js"></script>
+    </body>
+</html>
