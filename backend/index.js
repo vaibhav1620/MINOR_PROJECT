@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const joi = require("joi");
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const session = require("express-session");
-
-app.use(express.static(path.join(__dirname,'public')));
 const studentModel = require("./models/students");
 const teacherModel = require("./models/teachers");
+const AppError = require("./public/js/AppError");
+const wrapAsync = require("./public/js/wrapAsync");
+
+app.use(express.static(path.join(__dirname,'public')));
 
 mongoose.connect('mongodb://localhost:27017/MinorProject', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(()=>{
@@ -37,23 +40,26 @@ app.get("/Teacher", async function(req,res){
     res.render('teacher.ejs',{Teacher_details:teachers});
 })
 
-app.get('/Student/:Sid', async function(req,res){
+app.get('/Student/:Sid', wrapAsync(async function(req,res,next){
     const sid = req.params.Sid;
     const foundstudent = await studentModel.findOne({Sid:sid});
-    console.log(sid);
+    if(!foundstudent) {
+        throw new AppError('USER DOES NOT EXIST',404);
+    }
     res.render('student_index.ejs',{Student_details: foundstudent});
-})
+}))
 
-app.get('/Teacher/:Email', async function(req,res){
+app.get('/Teacher/:Email', wrapAsync(async function(req,res,next){
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({Email:email});
-    console.log(email);
+    if(!foundteacher) {
+        throw new AppError('USER DOES NOT EXIST',404);
+    }
     res.render('teacher_index.ejs',{Teacher_details: foundteacher});
-})
+}))
 
 app.get('/Student/:Sid/question', async function(req,res){
     const sid = req.params.Sid;
-    console.log(sid);
     res.render('question.ejs');
 })
 
@@ -73,27 +79,27 @@ app.get("/TLogin", function(req,res){
     res.render('teacher_login.ejs');
 })
 
-app.post('/Student',async function(req,res){
-    const password = req.body.Password;
-    const hash = await bcrypt.hash(password,12);
-    req.body.Password = hash;
-    const newStudent =  new studentModel(req.body);
-    await newStudent.save();
-    req.session.user_id = newStudent._id;
-    res.redirect('/Student/'+newStudent.Sid);
-})
+app.post('/Signup',wrapAsync(async function(req,res,next){
+        const password = req.body.Password;
+        const hash = await bcrypt.hash(password,12);
+        req.body.Password = hash;
+        const newStudent = new studentModel(req.body);
+        await newStudent.save();
+        req.session.user_id = newStudent._id;
+        res.redirect('/Student/'+newStudent.Sid);
+}))
 
-app.post('/TSignup',async function(req,res){
+app.post('/TSignup',wrapAsync(async function(req,res){
+    const newTeacher =  new teacherModel(req.body);
     const password = req.body.Password;
     const hash = await bcrypt.hash(password,12);
     req.body.Password = hash;
-    const newTeacher =  new teacherModel(req.body);
     await newTeacher.save();
     req.session.user_id = newTeacher._id;
     res.redirect('/Teacher/'+newTeacher.Email);
-})
+}))
 
-app.post("/Login", async function(req,res){
+app.post("/Login", wrapAsync(async function(req,res){
     const sid = req.body.Sid;
     const password = req.body.Password;
     const user = await studentModel.findOne({Sid:sid});
@@ -105,13 +111,13 @@ app.post("/Login", async function(req,res){
     else {
         res.redirect('/Login');
     }
-})
+}))
 
-app.post("/TLogin", async function(req,res){
-    console.log(req.body);
+app.post("/TLogin", wrapAsync(async function(req,res){
     const email = req.body.Email;
     const password = req.body.Password;
     const user = await teacherModel.findOne({Email:email});
+    console.log(user);
     const valid = await bcrypt.compare(password,user.Password);
     if(valid){
         req.session.user_id = user._id;
@@ -120,6 +126,17 @@ app.post("/TLogin", async function(req,res){
     else {
         res.redirect('/TLogin');
     }
+}))
+
+app.use(function(err,req,res,next){
+    console.log(err);
+    next(err);
+})
+
+app.use(function(err,req,res,next){
+    const status = err.status || 500;
+    const message = err.message || "something went wrong";
+    res.status(status).render('error.ejs');
 })
 
 app.listen(8080, function(){

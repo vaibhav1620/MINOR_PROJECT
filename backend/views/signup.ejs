@@ -57,32 +57,32 @@
                 <div id="input_form"class="col-xl">
                     <h5>ENTER YOUR DETAILS</h5>
                     <hr class="my-4" style="color:rgb(238,75,40);">
-                    <form class="" action="/Student" method="post">
+                    <form class="validated-form" action="/Signup" method="post" novalidate>
                       <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputUseranme">USERNAME</label>
-                              <input type="text" class="form-control" id="inputEmail" placeholder="Username" name="Username">
+                              <label for="username">USERNAME</label>
+                              <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputEmail">EMAIL</label>
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPassword">PASSWORD</label>
-                              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password">
+                              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPhone">PHONE NO.</label>
-                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone number" name="Phone">
+                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone number" name="Phone" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="studentid">STUDENT ID.</label>
-                              <input type="text" class="form-control" id="studentid" placeholder="Student Id" name="Sid">
+                              <input type="text" class="form-control" id="studentid" placeholder="Student Id" name="Sid" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="Branch">BRANCH</label>
                               <div class="">
-                                  <select id="Branch" class="" name="Branch" id="Branch" style="margin-left: 50px;margin-top:10px;">
+                                  <select id="Branch" class="" name="Branch" id="Branch" style="margin-left: 50px;margin-top:10px;" required>
                                         <option value="aerospace">Aerospace</option>
                                         <option value="civil">Civil</option>
                                         <option value="computerscience">Computer</option>
@@ -98,11 +98,11 @@
                           <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="guardian_name">GUARDIAN NAME</label>
-                              <input type="text" class="form-control" id="guardian_name" placeholder="Guardian Name" name="Guardian_name">
+                              <input type="text" class="form-control" id="guardian_name" placeholder="Guardian Name" name="Guardian_name" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="guardina_phone">GUARDIAN PHONE</label>
-                              <input type="text" class="form-control" id="guardian_phone" placeholder="Guardian Phone" name="Guardian_phone">
+                              <input type="text" class="form-control" id="guardian_phone" placeholder="Guardian Phone" name="Guardian_phone" required>
                             </div>
                           </div>
                           <div class="form-group">
@@ -113,6 +113,7 @@
             </div>
         </div>
 
+    <script src="/js/validation.js" charset="utf-8"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/bs-init.js"></script>

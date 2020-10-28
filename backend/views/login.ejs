@@ -45,14 +45,14 @@
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div id="login_input"class="col-sm-6" style="margin:auto;">
-                        <form action="/Login" method="post" style="margin:20px;">
+                        <form action="/Login" method="post" style="margin:20px;" class="validated-form" novalidate>
                           <div class="form-group">
                             <label for="exampleInputSid">STUDENT ID</label>
-                            <input type="text" class="form-control" id="exampleInputSid" placeholder="Sid" name="Sid">
+                            <input type="text" class="form-control" id="exampleInputSid" placeholder="Sid" name="Sid" required>
                           </div>
                           <div class="form-group">
                             <label for="exampleInputPassword1">PASSWORD</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********" name="Password">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********" name="Password" required>
                           </div>
                           <button type="submit" class="btn">Submit</button>
                         </form>

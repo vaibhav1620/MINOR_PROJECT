@@ -57,23 +57,23 @@
                 <div id="input_form"class="col-xl">
                     <h5>ENTER YOUR DETAILS</h5>
                     <hr class="my-4" style="color:rgb(238,75,40);">
-                    <form class="" action="/TSignup" method="post">
+                    <form class="validated-form" action="/TSignup" method="post" novalidate>
                       <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputUseranme">USERNAME</label>
-                              <input type="text" class="form-control" id="inputEmail" placeholder="Username" name="Username">
+                              <label for="username">USERNAME</label>
+                              <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputEmail">EMAIL</label>
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPassword">PASSWORD</label>
-                              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password">
+                              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password" required>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPhone">PHONE NO.</label>
-                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone number" name="Phone">
+                              <input type="text" class="form-control" id="inputPhone" placeholder="Phone number" name="Phone" required>
                             </div>
                       </div>
                       <button type="submit" class="btn">SIGN UP</button>
@@ -82,6 +82,7 @@
             </div>
         </div>
 
+    <script src="/js/validation.js" charset="utf-8"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/bs-init.js"></script>
