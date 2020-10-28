@@ -20,3 +20,12 @@ body{
 		font-size: 3rem;
 	}
 }
+
+button{
+    background-color: rgb(238,75,40);
+    border-radius: 12px;
+    padding: 15px 20px 15px 20px;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+}

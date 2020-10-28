@@ -5,8 +5,11 @@ const joi = require("joi");
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const session = require("express-session");
+
 const studentModel = require("./models/students");
 const teacherModel = require("./models/teachers");
+const formModel = require("./models/form");
+
 const AppError = require("./public/js/AppError");
 const wrapAsync = require("./public/js/wrapAsync");
 
@@ -58,9 +61,25 @@ app.get('/Teacher/:Email', wrapAsync(async function(req,res,next){
     res.render('teacher_index.ejs',{Teacher_details: foundteacher});
 }))
 
-app.get('/Student/:Sid/question', async function(req,res){
+app.get('/Student/:Sid/formstress', async function (req, res) {
     const sid = req.params.Sid;
-    res.render('question.ejs');
+    console.log(sid);
+    const questions = await formModel.find({ category: 's' });
+    res.render('question.ejs', { questions, heading: "Form 1", sid});
+})
+
+app.get('/Student/:Sid/formanxiety', async function (req, res) {
+    const sid = req.params.Sid;
+    console.log(sid);
+    const questions = await formModel.find({ category: 'a' });
+    res.render('question.ejs', { questions, heading: "Form 2", sid });
+})
+
+app.get('/Student/:Sid/formdepression', async function (req, res) {
+    const sid = req.params.Sid;
+    console.log(sid);
+    const questions = await formModel.find({ category: 'd' });
+    res.render('question.ejs', { questions, heading: "Form 3", sid });
 })
 
 app.get("/Signup", async function(req,res){
