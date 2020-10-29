@@ -55,13 +55,13 @@
         <hr class="style14 my-4">
         <% let nextLink = "" %>
         <% if(heading === "Form 1") { %>
-        <%    nextLink = "formanxiety" %>
+        <%    nextLink = "formstress" %>
         <% } else if (heading === "Form 2") {%>
-        <%    nextLink = "formdepression"%>
+        <%    nextLink = "formanxiety"%>
         <% } else{ %>
-        <%    nextLink = "" %>
+        <%    nextLink = "formdepression" %>
         <% } %>
-        <form action="/Student/<%= sid %>/<%= nextLink %>">
+        <form action="/Student/<%= sid %>/<%= nextLink %>" method="POST">
           <% for (let i=0; i<questions.length; i++) { %>
           <p>Ques <%= i+1 %>) <%= questions[i].question %> </p>
           <div class="form-check">
