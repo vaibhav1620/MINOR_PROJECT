@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item" role="presentation">
-                        	<a class="nav-link js-scroll-trigger" href="#" style="color: rgb(0,0,0); font-weight:700;"><%= Student_details.username %></a>
+                        	<a class="nav-link js-scroll-trigger" href="#" style="color: rgb(0,0,0); font-weight:700;"><%= Teacher_details.username %></a>
                         </li>
                         <li class="nav-item" role="presentation">
                         	<a class="nav-link js-scroll-trigger" href="/login" style="color: rgb(0,0,0); font-weight:700;">Logout</a>
@@ -54,13 +54,15 @@
                         </div>
                     </div>
                     <div class="col-lg-8" style="margin-top:70px;">
-                        <canvas id="myChart2" style="background: white;padding:30px;border-radius:50px;"></canvas>
+                        <canvas id="myChart" style="background: white; margin-bottom:20px;padding:30px;border-radius:50px;"></canvas>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <canvas id="myChart" style="background: white; margin-bottom:20px;padding:30px;border-radius:50px;"></canvas>
+                    <canvas id="myChart2" style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
+                    <canvas id="myChart3" style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
+                    <canvas id="myChart4" style="background: white;padding:30px;border-radius:50px;"></canvas>
                 </div>
             </div>
         </div>
@@ -73,6 +75,8 @@
             const responses3 = '<%- JSON.stringify(Form3[0].response) %>';
             const student_responses3 = JSON.parse(responses3);
             const temp_data1 = [];
+            const temp_data2 = [];
+            const temp_data3 = [];
             for(var i = 0;i<student_responses.length;i++)
             {
                 if(student_responses[i]==="op0")
@@ -96,53 +100,53 @@
             {
                 if(student_responses2[i]==="op0")
                 {
-                    temp_data1.push(1);
+                    temp_data2.push(1);
                 }
                 if(student_responses2[i]==="op1")
                 {
-                    temp_data1.push(2);
+                    temp_data2.push(2);
                 }
                 if(student_responses2[i]==="op2")
                 {
-                    temp_data1.push(3);
+                    temp_data2.push(3);
                 }
                 if(student_responses2[i]==="op3")
                 {
-                    temp_data1.push(4);
+                    temp_data2.push(4);
                 }
             }
             for(var i = 0;i<student_responses3.length;i++)
             {
                 if(student_responses3[i]==="op0")
                 {
-                    temp_data1.push(1);
+                    temp_data3.push(1);
                 }
                 if(student_responses3[i]==="op1")
                 {
-                    temp_data1.push(2);
+                    temp_data3.push(2);
                 }
                 if(student_responses3[i]==="op2")
                 {
-                    temp_data1.push(3);
+                    temp_data3.push(3);
                 }
                 if(student_responses3[i]==="op3")
                 {
-                    temp_data1.push(4);
+                    temp_data3.push(4);
                 }
             }
-
-
-            var score = 10;
-            for(var i=0;i<temp_data1.length;i++)
+            var score1 = 0;
+            var score2 = 0;
+            var score3 = 0;
+            for(var i=0;i<14;i++)
             {
-                score += temp_data1[i];
+                score1 += temp_data1[i];
+                score2 += temp_data2[i];
+                score3 += temp_data3[i];
             }
-            score = (score/42);
             const label = [];
-            for(var i=0;i<42;i++){
+            for(var i=0;i<14;i++){
                 label.push(i+1);
             }
-
 
             var ctx = document.getElementById('myChart');
             var myChart = new Chart(ctx, {
@@ -150,13 +154,35 @@
                 data: {
                     labels: label,
                     datasets: [{
-                        label: 'Student Response',
+                        label: 'Student Response 1',
                         data: temp_data1,
                         backgroundColor: [
                             'rgba(255, 244, 2, 0.2)',
                         ],
                         borderColor: [
                             'rgba(238, 75, 40, 1)',
+                        ],
+                        borderWidth: 2,
+                    },
+                    {
+                        label: 'Student Response 2',
+                        data: temp_data2,
+                        backgroundColor: [
+                            'rgba(238,75,21,0.2)',
+                        ],
+                        borderColor: [
+                            'black',
+                        ],
+                        borderWidth: 2,
+                    },
+                    {
+                        label: 'Student Response 3',
+                        data: temp_data3,
+                        backgroundColor: [
+                            'rgba(127, 344, 60, 0.2)',
+                        ],
+                        borderColor: [
+                            'blue',
                         ],
                         borderWidth: 2,
                     }]
@@ -179,7 +205,63 @@
                     labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
                     datasets: [{
                         label: 'H.I.M. Index Score',
-                        data: [0,0,0,0,0,0,0,0,0,score,0,0,4],
+                        data: [0,0,0,0,0,0,0,0,0,score1,0,0,4],
+                        backgroundColor: [
+                            'rgba(255, 244, 2, 2)',
+                        ],
+                        borderColor: [
+                            'rgba(238, 75, 40, 1)',
+                        ],
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var ctx3 = document.getElementById('myChart3');
+            var myChart3 = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
+                    datasets: [{
+                        label: 'H.I.M. Index Score',
+                        data: [0,0,0,0,0,0,0,0,0,score2,0,0,4],
+                        backgroundColor: [
+                            'rgba(255, 244, 2, 2)',
+                        ],
+                        borderColor: [
+                            'rgba(238, 75, 40, 1)',
+                        ],
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var ctx4 = document.getElementById('myChart4');
+            var myChart4 = new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
+                    datasets: [{
+                        label: 'H.I.M. Index Score',
+                        data: [0,0,0,0,0,0,0,0,0,score3,0,0,4],
                         backgroundColor: [
                             'rgba(255, 244, 2, 2)',
                         ],
