@@ -1,6 +1,6 @@
 body{
     background: rgb(238,75,40);
-    padding-top: 100px;
+    padding-top: 70px;
     height: 100%;
     color: black;
 }
@@ -34,7 +34,6 @@ body{
 .card{
     padding: 20px;
     border-radius: 50px;
-    margin: 15px;
 }
 .navbar-light .navbar-brand{
     color: rgb(238,75,40);
@@ -47,5 +46,5 @@ h5{
 .btn{
     background: rgb(238,75,40);
     border-radius: 50px;
-    color: white;
+    color:white ;
 }

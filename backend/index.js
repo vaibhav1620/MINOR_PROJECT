@@ -64,7 +64,10 @@ app.get("/Teacher/:Email/:Branch", wrapAsync(async function(req,res,next){
     const branch = req.params.Branch;
     const wholeBranch = await studentModel.find({Branch:branch});
     const link = "/Teacher/"+req.params.Email+"/"+req.params.Branch;
-    res.render('branch.ejs',{Branch: wholeBranch,heading:branch,link:link});
+    const link1 = "/Teacher/"+req.params.Email;
+    const email = req.params.Email;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    res.render('branch.ejs',{Branch: wholeBranch,heading:branch,link:link,link1:link1, Teacher_details: foundteacher});
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function(req,res,next){
