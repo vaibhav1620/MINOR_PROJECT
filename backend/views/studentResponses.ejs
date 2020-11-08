@@ -51,17 +51,23 @@
                           <p>Branch: <%= Student_details.Branch %></p>
                           <p>Guardian Name: <%= Student_details.Guardian_name %></p>
                           <p>Guardian Phone: <%= Student_details.Guardian_phone %></p>
+                          <a class="btn btn-lg" style="margin-top:25px;" href="<%=link1%>">BACK TO BRANCH VIEW</a>
                         </div>
                     </div>
-                    <div class="col-lg-8" style="margin-top:70px;">
+                    <div class="col-lg-8" style="margin-top:30px;">
+                        <a class="btn btn-lg" style="margin:15px;" href="<%=link%>/responseStress">SEE DETAILED RESPONSES</a>
                         <canvas id="myChart" style="background: white; margin-bottom:20px;padding:30px;border-radius:50px;"></canvas>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-12" style="background: white; border-radius: 50px; margin-bottom: 50px;">
-                    <h1 style="text-align: center; margin-top: 10px;">Interpretation of Scores</h1>
-                    <img src="/img/scale.png" style="margin-bottom: 50px; margin-left: 100px; margin-top: 10px;">
+                <div class="col-lg-12" style="background: white; border-radius: 50px; margin-bottom: 40px;padding-bottom:30px;">
+                    <h1 style="text-align: center; margin-top: 10px;">INTERPRETATION OF SCORES</h1>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img src="/img/scale.png" style="width:100%;height:100%;">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -75,14 +81,124 @@
                     <canvas id="myChart4" style="background: white;padding:30px;border-radius:50px;"></canvas>
                 </div>
             </div>
+            <div  style="background: white;margin-top:30px;border-radius:50px;">
+                <div>
+                    <div class="row justify-content-center">
+                        <h1 style="padding-top:10px;">ALL RESPONSES FILLED</h1>
+                    </div>
+                    <div class="row"  style="padding:30px;">
+                        <% for(var i=0;i<Form1.length;i++) { %>
+                            <div class="col-lg-2">
+                                <a class="btn" style="margin:15px;" href="<%=link%>/<%=Form1[i].id%>/responseStress"><%= Form1[i].month %> - <%= Form1[i].year %></a>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
-            const responses = '<%- JSON.stringify(Form1[0].response) %>';
+            let yearmap = new Map();
+            yearmap['January'] = 0;
+            yearmap['February'] = 1;
+            yearmap['March'] = 2;
+            yearmap['April'] = 3;
+            yearmap['May'] = 4;
+            yearmap['June'] = 5;
+            yearmap['July'] = 6;
+            yearmap['August'] = 7;
+            yearmap['September'] = 8;
+            yearmap['October'] = 9;
+            yearmap['November'] = 10;
+            yearmap['December'] = 11;
+            var score1 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
+            var score2 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
+            var score3 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
+            const year1 = '<%- JSON.stringify(yearform1) %>';
+            const yearresponses1 = JSON.parse(year1);
+            const year2 = '<%- JSON.stringify(yearform2) %>';
+            const yearresponses2 = JSON.parse(year2);
+            const year3 = '<%- JSON.stringify(yearform3) %>';
+            const yearresponses3 = JSON.parse(year3);
+            for(var i=0;i<yearresponses1.length;i++)
+            {
+                var temp=0;
+                for(var j=0;j<14;j++)
+                {
+                    if(yearresponses1[i].response[j]==="op0")
+                    {
+                        temp+=0;
+                    }
+                    if(yearresponses1[i].response[j]==="op1")
+                    {
+                        temp+=1;
+                    }
+                    if(yearresponses1[i].response[j]==="op2")
+                    {
+                        temp+=2;
+                    }
+                    if(yearresponses1[i].response[j]==="op3")
+                    {
+                        temp+=3;
+                    }
+                }
+                score1[yearmap[yearresponses1[i].month]] = temp;
+            }
+            for(var i=0;i<yearresponses2.length;i++)
+            {
+                var temp1=0;
+                for(var j=0;j<14;j++)
+                {
+                    if(yearresponses2[i].response[j]==="op0")
+                    {
+                        temp1+=0;
+                    }
+                    if(yearresponses2[i].response[j]==="op1")
+                    {
+                        temp1+=1;
+                    }
+                    if(yearresponses2[i].response[j]==="op2")
+                    {
+                        temp1+=2;
+                    }
+                    if(yearresponses2[i].response[j]==="op3")
+                    {
+                        temp1+=3;
+                    }
+                }
+                score2[yearmap[yearresponses2[i].month]] = temp1;
+            }
+            for(var i=0;i<yearresponses3.length;i++)
+            {
+                var temp2=0;
+                for(var j=0;j<14;j++)
+                {
+                    if(yearresponses3[i].response[j]==="op0")
+                    {
+                        temp2+=0;
+                    }
+                    if(yearresponses3[i].response[j]==="op1")
+                    {
+                        temp2+=1;
+                    }
+                    if(yearresponses3[i].response[j]==="op2")
+                    {
+                        temp2+=2;
+                    }
+                    if(yearresponses3[i].response[j]==="op3")
+                    {
+                        temp2+=3;
+                    }
+                }
+                score3[yearmap[yearresponses3[i].month]] = temp2;
+            }
+
+
+            const responses = '<%- JSON.stringify(Form1[Form1.length-1].response) %>';
             const student_responses = JSON.parse(responses);
-            const responses2 = '<%- JSON.stringify(Form2[0].response) %>';
+            const responses2 = '<%- JSON.stringify(Form2[Form2.length-1].response) %>';
             const student_responses2 = JSON.parse(responses2);
-            const responses3 = '<%- JSON.stringify(Form3[0].response) %>';
+            const responses3 = '<%- JSON.stringify(Form3[Form3.length-1].response) %>';
             const student_responses3 = JSON.parse(responses3);
             const temp_data1 = [];
             const temp_data2 = [];
@@ -144,15 +260,15 @@
                     temp_data3.push(3);
                 }
             }
-            var score1 = 0;
-            var score2 = 0;
-            var score3 = 0;
-            for(var i=0;i<14;i++)
-            {
-                score1 += temp_data1[i];
-                score2 += temp_data2[i];
-                score3 += temp_data3[i];
-            }
+            // var score1=0;
+            // var score2=0;
+            // var score3=0;
+            // for(var i=0;i<14;i++)
+            // {
+            //     score1 += temp_data1[i];
+            //     score2 += temp_data2[i];
+            //     score3 += temp_data3[i];
+            // }
             const label = [];
             for(var i=0;i<14;i++){
                 label.push(i+1);
@@ -215,12 +331,35 @@
                     labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
                     datasets: [{
                         label: 'Stress Form',
-                        data: [0,0,0,0,0,0,0,0,0,score1,0,0,4],
+                        data: score1,
                         backgroundColor: [
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
                             'rgba(255, 244, 2, 2)',
                         ],
                         borderColor: [
                             'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+
                         ],
                         borderWidth: 2,
                     }]
@@ -243,11 +382,33 @@
                     labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
                     datasets: [{
                         label: 'Anxiety Form',
-                        data: [0,0,0,0,0,0,0,0,0,score2,0,0,4],
+                        data: score2,
                         backgroundColor: [
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
                             'rgba(255, 244, 2, 2)',
                         ],
                         borderColor: [
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
                             'rgba(238, 75, 40, 1)',
                         ],
                         borderWidth: 2,
@@ -271,11 +432,33 @@
                     labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
                     datasets: [{
                         label: 'Depression Form',
-                        data: [0,0,0,0,0,0,0,0,0,score3,0,0,4],
+                        data: score3,
                         backgroundColor: [
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
+                            'rgba(255, 244, 2, 2)',
                             'rgba(255, 244, 2, 2)',
                         ],
                         borderColor: [
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
+                            'rgba(238, 75, 40, 1)',
                             'rgba(238, 75, 40, 1)',
                         ],
                         borderWidth: 2,

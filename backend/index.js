@@ -63,6 +63,19 @@ app.get("/Teacher", async function (req, res) {
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const d = new Date();
 
+function compare1(a, b) {
+      const sid1 = a.Sid;
+      const sid2 = b.Sid;
+
+      let comparison = 0;
+      if (sid1 > sid2) {
+        comparison = 1;
+      }else if (sid1 < sid2) {
+        comparison = -1;
+      }
+      return comparison;
+}
+
 app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
     const branch = req.params.Branch;
     const wholeBranch = await studentModel.find({ Branch: branch });
@@ -70,54 +83,96 @@ app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
     const link1 = "/Teacher/" + req.params.Email;
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({ Email: email });
+    wholeBranch.sort(compare1);
     res.render('branch.ejs', { Branch: wholeBranch, heading: branch, link: link, link1: link1, Teacher_details: foundteacher });
 }))
-
-app.get("/Teacher/:Email/:Branch/:Sid/responseStress", async function (req, res) {
-    const sid = req.params.Sid;
-    const form = await stressModel.find({ Sid: sid, month: months[d.getMonth()], year: d.getFullYear() });
-    const foundstudent = await studentModel.findOne({ Sid: sid });
-    const email = req.params.Email;
-    const branch = req.params.Branch;
-    const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 's' });
-    res.render("responseStress.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid, email, branch });
-})
-
-app.get("/Teacher/:Email/:Branch/:Sid/responseAnxiety", async function (req, res) {
-    const sid = req.params.Sid;
-    const form = await anxietyModel.find({ Sid: sid, month: months[d.getMonth()], year: d.getFullYear() });
-    const foundstudent = await studentModel.findOne({ Sid: sid });
-    const email = req.params.Email;
-    const branch = req.params.Branch;
-    const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'a' });
-    res.render("responseAnxiety.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions, sid, email, branch });
-})
-
-app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", async function (req, res) {
-    const sid = req.params.Sid;
-    const form = await depressionModel.find({ Sid: sid, month: months[d.getMonth()], year: d.getFullYear() });
-    const foundstudent = await studentModel.findOne({ Sid: sid });
-    const email = req.params.Email;
-    const branch = req.params.Branch;
-    const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'd' });
-    res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch });
-})
 
 app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     const form1 = await stressModel.find({ Sid: sid });
     const form2 = await anxietyModel.find({ Sid: sid });
     const form3 = await depressionModel.find({ Sid: sid });
+    const yearform1 = await stressModel.find({ Sid: sid, year: d.getFullYear() });
+    const yearform2 = await anxietyModel.find({ Sid: sid, year: d.getFullYear() });
+    const yearform3 = await depressionModel.find({ Sid: sid, year: d.getFullYear() });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
+    const link = "/Teacher/" + req.params.Email + "/" + req.params.Branch+ "/" + req.params.Sid;
+    const link1 = "/Teacher/" + req.params.Email + "/" + req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
     if (form1.length === 0) {
         throw new AppError('USER HAS NOT FILLED AY FORM YET', 404);
     }
-    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid });
+    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid,link:link, link1, yearform1, yearform2, yearform3 });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/responseStress",wrapAsync( async function (req, res) {
+    const sid = req.params.Sid;
+    const form = await stressModel.find({ Sid: sid});
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 's' });
+    res.render("responseStress.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid, email, branch });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/responseAnxiety", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const form = await anxietyModel.find({ Sid: sid });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 'a' });
+    res.render("responseAnxiety.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions, sid, email, branch });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const form = await depressionModel.find({ Sid: sid });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 'd' });
+    res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress",wrapAsync( async function (req, res) {
+    const sid = req.params.Sid;
+    const id = req.params.id;
+    const form = await stressModel.find({ Sid: sid, id:id });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 's' });
+    res.render("responseStress1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid, email, branch, id });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/:id/responseAnxiety", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const id = req.params.id;
+    const form = await anxietyModel.find({ Sid: sid, id:id  });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 'a' });
+    res.render("responseAnxiety1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions, sid, email, branch, id });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/:id/responseDepression", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const id = req.params.id;
+    const form = await depressionModel.find({ Sid: sid, id:id  });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    const questions = await formModel.find({ category: 'd' });
+    res.render("responseDepression1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch, id });
 }))
 
 app.get('/Student/:Sid', wrapAsync(async function (req, res, next) {

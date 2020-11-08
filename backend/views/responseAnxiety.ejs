@@ -54,26 +54,27 @@
           <p class="lead">Responses of SID: <%= sid %> .</p>
           <hr class="style14 my-4">
           <% let arr = ["Never", "Sometimes", "Often", "Almost Always"]; %>
-          <% let obj %> 
+          <% let obj %>
           <% for (let i=0; i<questions.length; i++) { %>
           <p>Ques <%= i+1 %>) <%= questions[i].question %> </p>
           <% let ans = 0 %>
-          <% if(form[0].response[i] === "op0") { %>
+          <% if(form[form.length-1].response[i] === "op0") { %>
           <% ans = 0 %>
           <% } %>
-          <% if(form[0].response[i] === "op1") { %>
+          <% if(form[form.length-1].response[i] === "op1") { %>
           <% ans = 1 %>
           <% } %>
-          <% if(form[0].response[i] === "op2") { %>
+          <% if(form[form.length-1].response[i] === "op2") { %>
           <% ans = 2 %>
           <% } %>
-          <% if(form[0].response[i] === "op3") { %>
+          <% if(form[form.length-1].response[i] === "op3") { %>
           <% ans = 3 %>
           <% } %>
           <p>Ans <%= i+1 %>) <%= arr[ans] %></p>
           <% } %>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseDepression">Next</a>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseStress">Back</a>
+            <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseStress">Back</a>
+            <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseDepression">Next</a>
+
         </div>
       </div>
     </section>
