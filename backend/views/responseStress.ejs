@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/fonts/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-  <link rel="stylesheet" href="/css/QuestionFormCSS.css">
+  <link rel="stylesheet" href="/css/ResponseCSS.css">
   <title><%= heading %> Responses</title>
 </head>
 
@@ -72,6 +72,8 @@
           <% } %>
           <p>Ans <%= i+1 %>) <%= arr[ans] %></p>
           <% } %>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseAnxiety">Next</a>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>">Back</a>
         </div>
       </div>
     </section>

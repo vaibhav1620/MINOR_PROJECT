@@ -1,0 +1,31 @@
+body{
+    background: rgb(238,75,40);
+    padding-top: 100px;
+    height: 100%;
+    color: black;
+}
+
+.navbar-light .navbar-brand{
+    color: rgb(238,75,40);
+}
+
+#jumbo{
+    background: white;
+    border-radius: 50px;
+}
+
+@media (max-width: 576px){
+	/*we want these settings when screen size is below 576 px*/
+	#jumbo h1 {
+		font-size: 3rem;
+	}
+}
+
+a.next{
+    background-color: rgb(238,75,40);
+    border-radius: 12px;
+    padding: 15px 20px 15px 20px;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+}
