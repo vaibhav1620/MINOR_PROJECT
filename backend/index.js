@@ -79,7 +79,7 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseStress", async function (req, res)
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({ Email: email });
     const questions = await formModel.find({ category: 's' });
-    res.render("responseStress.ejs", { form1: form1, form2: form2, form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions });
+    res.render("responseStress.ejs", { form1: form1, form2: form2, form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid });
 })
 
 app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next) {
