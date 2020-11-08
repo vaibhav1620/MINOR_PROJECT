@@ -23,51 +23,65 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40); font-weight:700;">H.I.M</a>
-            <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-align-justify"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link js-scroll-trigger" href="#" style="color: rgb(0,0,0); font-weight:700;"><%= Teacher_details.username %></a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link js-scroll-trigger" href="/login" style="color: rgb(0,0,0); font-weight:700;">Logout</a>
-                    </li>
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40); font-weight:700;">H.I.M</a>
+      <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right"
+        type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-align-justify"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link js-scroll-trigger" href="#"
+              style="color: rgb(0,0,0); font-weight:700;"><%= Teacher_details.username %></a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link js-scroll-trigger" href="/login" style="color: rgb(0,0,0); font-weight:700;">Logout</a>
+          </li>
+          <li class="nav-item" role="presentation"></li>
+          <li class="nav-item" role="presentation"></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-     <div class="container">
-         <section class="container-fluid px-0">
-           <div class="row">
-             <div id="jumbo" class="jumbotron col-12">
-               <h1 class="display-4"><%= heading %></h1>
-               <p class="lead">Responses of SID: <%= sid %> .</p>
-               <hr class="style14 my-4">
-               <%  %>
-               <%  %>
-               <%  %> 
-               <%  %>
-               <%  %>
-               <%  %>
-             </div>
-           </div>
-         </section>
-     </div>
+  <div class="container">
+    <section class="container-fluid px-0">
+      <div class="row">
+        <div id="jumbo" class="jumbotron col-12">
+          <h1 class="display-4"><%= heading %></h1>
+          <p class="lead">Responses of SID: <%= sid %> .</p>
+          <hr class="style14 my-4">
+          <% let arr = ["Never", "Sometimes", "Often", "Almost Always"]; %>
+          <% let obj %> 
+          <% for (let i=0; i<questions.length; i++) { %>
+          <p>Ques <%= i+1 %>) <%= questions[i].question %> </p>
+          <% let ans = 0 %>
+          <% if(form[0].response[i] === "op0") { %>
+          <% ans = 0 %>
+          <% } %>
+          <% if(form[0].response[i] === "op1") { %>
+          <% ans = 1 %>
+          <% } %>
+          <% if(form[0].response[i] === "op2") { %>
+          <% ans = 2 %>
+          <% } %>
+          <% if(form[0].response[i] === "op3") { %>
+          <% ans = 3 %>
+          <% } %>
+          <p>Ans <%= i+1 %>) <%= arr[ans] %></p>
+          <% } %>
+        </div>
+      </div>
+    </section>
+  </div>
 
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -83,14 +97,14 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <script src="/js/creative.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/bs-init.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+  <script src="/js/creative.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </body>
 
 </html>

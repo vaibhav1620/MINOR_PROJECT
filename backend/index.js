@@ -60,6 +60,9 @@ app.get("/Teacher", async function (req, res) {
     res.render('teacher.ejs', { Teacher_details: teachers });
 })
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const d = new Date();
+
 app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
     const branch = req.params.Branch;
     const wholeBranch = await studentModel.find({ Branch: branch });
@@ -72,14 +75,12 @@ app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
 
 app.get("/Teacher/:Email/:Branch/:Sid/responseStress", async function (req, res) {
     const sid = req.params.Sid;
-    const form1 = await stressModel.find({ Sid: sid });
-    const form2 = await anxietyModel.find({ Sid: sid });
-    const form3 = await depressionModel.find({ Sid: sid });
+    const form = await stressModel.find({ Sid: sid, month: months[d.getMonth()], year: d.getFullYear() });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({ Email: email });
     const questions = await formModel.find({ category: 's' });
-    res.render("responseStress.ejs", { form1: form1, form2: form2, form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid });
+    res.render("responseStress.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid });
 })
 
 app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next) {
@@ -115,8 +116,6 @@ app.get('/Teacher/:Email', wrapAsync(async function (req, res, next) {
     res.render('teacher_index.ejs', { Teacher_details: foundteacher, link: link });
 }))
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const d = new Date();
 
 app.get('/Student/:Sid/formstress', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
