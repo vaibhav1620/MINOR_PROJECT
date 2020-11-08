@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'notagoodsecret' }));
 app.use(methodOverride('_method'));
 app.use(flash());
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
     res.locals.messages = req.flash('success');
     next();
 })
@@ -46,7 +46,7 @@ app.get("/", async function (req, res) {
 })
 
 app.get("/flash", async function (req, res) {
-    req.flash('success','welcome to HIM');
+    req.flash('success', 'welcome to HIM');
     res.render('error.ejs');
 })
 
@@ -60,29 +60,40 @@ app.get("/Teacher", async function (req, res) {
     res.render('teacher.ejs', { Teacher_details: teachers });
 })
 
-app.get("/Teacher/:Email/:Branch", wrapAsync(async function(req,res,next){
+app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
     const branch = req.params.Branch;
-    const wholeBranch = await studentModel.find({Branch:branch});
-    const link = "/Teacher/"+req.params.Email+"/"+req.params.Branch;
-    const link1 = "/Teacher/"+req.params.Email;
+    const wholeBranch = await studentModel.find({ Branch: branch });
+    const link = "/Teacher/" + req.params.Email + "/" + req.params.Branch;
+    const link1 = "/Teacher/" + req.params.Email;
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    res.render('branch.ejs',{Branch: wholeBranch,heading:branch,link:link,link1:link1, Teacher_details: foundteacher});
+    res.render('branch.ejs', { Branch: wholeBranch, heading: branch, link: link, link1: link1, Teacher_details: foundteacher });
 }))
 
-app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function(req,res,next){
+app.get("/Teacher/:Email/:Branch/:Sid/responseStress", async function (req, res) {
     const sid = req.params.Sid;
-    const form1 = await stressModel.find({Sid:sid});
-    const form2 = await anxietyModel.find({Sid:sid});
-    const form3 = await depressionModel.find({Sid:sid});
+    const form1 = await stressModel.find({ Sid: sid });
+    const form2 = await anxietyModel.find({ Sid: sid });
+    const form3 = await depressionModel.find({ Sid: sid });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    if(form1.length === 0)
-    {
+    const questions = await formModel.find({ category: 's' });
+    res.render("responseStress.ejs", { form1: form1, form2: form2, form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions });
+})
+
+app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next) {
+    const sid = req.params.Sid;
+    const form1 = await stressModel.find({ Sid: sid });
+    const form2 = await anxietyModel.find({ Sid: sid });
+    const form3 = await depressionModel.find({ Sid: sid });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    if (form1.length === 0) {
         throw new AppError('USER HAS NOT FILLED AY FORM YET', 404);
     }
-    res.render('studentResponses.ejs',{Form1: form1,Form2: form2,Form3: form3 ,Student_details: foundstudent, Teacher_details: foundteacher });
+    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid });
 }))
 
 app.get('/Student/:Sid', wrapAsync(async function (req, res, next) {
@@ -100,8 +111,8 @@ app.get('/Teacher/:Email', wrapAsync(async function (req, res, next) {
     if (!foundteacher) {
         throw new AppError('USER DOES NOT EXIST', 404);
     }
-    const link = "/Teacher/"+req.params.Email;
-    res.render('teacher_index.ejs', { Teacher_details: foundteacher,link:link });
+    const link = "/Teacher/" + req.params.Email;
+    res.render('teacher_index.ejs', { Teacher_details: foundteacher, link: link });
 }))
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -112,18 +123,18 @@ app.get('/Student/:Sid/formstress', wrapAsync(async function (req, res, next) {
     // console.log(sid);
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const questions = await formModel.find({ category: 's' });
-    res.render('question.ejs', { questions, heading: "Form 1", sid,Student_details: foundstudent });
+    res.render('question.ejs', { questions, heading: "Form 1", sid, Student_details: foundstudent });
 }))
 
-app.post('/Student/:Sid/formstress', wrapAsync(async function (req, res ,next) {
+app.post('/Student/:Sid/formstress', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     const obj = req.body;
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await stressModel.findOne({ id: id });
-    if(check){
+    if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new stressModel({Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj)});
+    const user = new stressModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
     await user.save();
     res.redirect("/Student/" + sid + "/formanxiety");
 }))
@@ -141,10 +152,10 @@ app.post('/Student/:Sid/formanxiety', wrapAsync(async function (req, res, next) 
     const obj = req.body;
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await anxietyModel.findOne({ id: id });
-    if(check){
+    if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new anxietyModel({Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj)});
+    const user = new anxietyModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
     await user.save();
     res.redirect("/Student/" + sid + "/formdepression");
 }))
@@ -162,10 +173,10 @@ app.post('/Student/:Sid/formdepression', wrapAsync(async function (req, res) {
     const obj = req.body;
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await depressionModel.findOne({ id: id });
-    if(check){
+    if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new depressionModel({Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj)});
+    const user = new depressionModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
     await user.save();
     res.redirect("/Student/" + sid + "/");
 }))
@@ -202,8 +213,7 @@ app.post('/TSignup', wrapAsync(async function (req, res, next) {
     req.body.Password = hash;
     const newTeacher = new teacherModel(req.body);
     await newTeacher.save();
-    if(!newTeacher)
-    {
+    if (!newTeacher) {
         throw new AppError('Professor validation failed! Check your Details');
     }
     req.session.user_id = newTeacher._id;
@@ -214,7 +224,7 @@ app.post("/Login", wrapAsync(async function (req, res) {
     const sid = req.body.Sid;
     const password = req.body.Password;
     const user = await studentModel.findOne({ Sid: sid });
-    if(!user){
+    if (!user) {
         throw new AppError('USER DOES NOT EXIST CHECK YOUR CREDENTIALS');
     }
     const valid = await bcrypt.compare(password, user.Password);
@@ -227,11 +237,11 @@ app.post("/Login", wrapAsync(async function (req, res) {
     }
 }))
 
-app.post("/TLogin", wrapAsync(async function (req, res ,next) {
+app.post("/TLogin", wrapAsync(async function (req, res, next) {
     const email = req.body.Email;
     const password = req.body.Password;
-    const user = await teacherModel.findOne({Email:email})
-    if(!user){
+    const user = await teacherModel.findOne({ Email: email })
+    if (!user) {
         throw new AppError('USER DOES NOT EXIST CHECK YOUR CREDENTIALS');
     }
     const valid = await bcrypt.compare(password, user.Password);
@@ -250,8 +260,8 @@ app.use(function (err, req, res, next) {
 
 app.use(function (err, req, res, next) {
     const status = err.status || 500;
-    const message = "SOMETHING WENT WRONG : Futher Details : " + err.message ||  "SOMETHING WENT WRONG";
-    res.status(status).render('error.ejs',{message:message});
+    const message = "SOMETHING WENT WRONG : Futher Details : " + err.message || "SOMETHING WENT WRONG";
+    res.status(status).render('error.ejs', { message: message });
 })
 
 app.listen(8080, function () {
