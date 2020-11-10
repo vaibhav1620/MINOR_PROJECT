@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item" role="presentation">
-                        	<a class="nav-link js-scroll-trigger" href="" style="color: rgb(0,0,0); font-weight:700;"><%= Teacher_details.username %></a>
+                        	<a class="nav-link js-scroll-trigger" href="" style="color: rgb(0,0,0); font-weight:700;text-transform: uppercase;"><%= Teacher_details.username %></a>
                         </li>
                         <li class="nav-item" role="presentation">
                         	<a class="nav-link js-scroll-trigger" href="/tlogin" style="color: rgb(0,0,0); font-weight:700;">Logout</a>
@@ -53,8 +53,9 @@
                         <div class="jumbotron">
                           <h1 class="display-4" style="text-transform: uppercase;"><%= Teacher_details.username %></h1>
                           <hr class="my-4">
-                          <h3>Email: <%= Teacher_details.Email %></h2>
-                          <h3>Phone: <%= Teacher_details.Phone %></h2>
+                          <h3>Email: <%= Teacher_details.Email %></h3>
+                          <h3>Phone: <%= Teacher_details.Phone %></h3>
+                          <h3>Professor Id: <%= Teacher_details.Tid %></h3>
                         </div>
                     </div>
                 </div>

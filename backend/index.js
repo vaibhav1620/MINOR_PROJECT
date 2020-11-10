@@ -288,6 +288,10 @@ app.post('/TSignup', wrapAsync(async function (req, res, next) {
     const password = req.body.Password;
     const hash = await bcrypt.hash(password, 12);
     req.body.Password = hash;
+    const tid = req.body.Tid;
+    if (tid < 3000 || tid > 10000) {
+        throw new AppError('Professor validation failed! Check your Details');
+    }
     const newTeacher = new teacherModel(req.body);
     await newTeacher.save();
     if (!newTeacher) {

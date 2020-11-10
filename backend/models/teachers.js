@@ -18,6 +18,11 @@ const teacherSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        Tid:{
+            type: String,
+            required: true,
+            unique: true
+        }
 })
 
 const Teacher = mongoose.model('Teacher',teacherSchema);

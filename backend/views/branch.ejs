@@ -20,7 +20,7 @@
                     aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="<%= link1 %>" style="color:white;"><%= Teacher_details.username %></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="<%= link1 %>" style="color:white;text-transform: uppercase;"><%= Teacher_details.username %></a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="\tlogin" style="color:white;">Logout</a></li>
                         <!-- <li class="nav-item" role="presentation"></li>
                         <li class="nav-item" role="presentation"></li> -->
@@ -32,6 +32,9 @@
             <div class="container">
                 <% if(heading === "computerscience"){ %>
                     <% heading = "Computer Science"; %>
+                <% } %>
+                <% if(heading === "mettalurgical"){ %>
+                    <% heading = "Metallurgy"; %>
                 <% } %>
                 <h1 style="text-transform: uppercase;margin-bottom:30px;"><%= heading %></h1>
             </div>
