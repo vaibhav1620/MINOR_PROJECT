@@ -1,0 +1,14 @@
+{
+  "name": "sentilyzer",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "apos-to-lex-form": "^1.0.0",
+    "express": "~4.16.1",
+    "natural": "^0.6.3",
+    "spelling-corrector": "^3.0.0",
+    "stopword": "^0.3.3"
+  }
+}
