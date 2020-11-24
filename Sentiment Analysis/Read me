@@ -1,1 +1,3 @@
 Download these files and then go to respective directory and just start npm server.
+
+Also, I have not added the node_modules, as Sahil said that everyone has node installed. 
