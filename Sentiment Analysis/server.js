@@ -68,6 +68,6 @@ app.get('/', function(req, res){
 
 		res.send({'analysis':analysis});
 	}else{
-		res.send('usage -> <a href="?q=your-text-here">'+req.get('host')+'?q=your-text-here</a><br>source code -> <a href="https://github.com/ffd8/sentilyzer">github</a>');
+		res.send('usage -> <a href="?q=your-text-here">'+req.get('host')+'?q=your-text-here</a>');
 	}
 });
