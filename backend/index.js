@@ -8,6 +8,14 @@ const session = require("express-session");
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const Chart = require('chart.js');
+const http = require('http');
+const aposToLexForm = require('apos-to-lex-form');
+const natural = require('natural');
+const SpellCorrector = require('spelling-corrector');
+const SW = require('stopword');
+
+const spellCorrector = new SpellCorrector();
+spellCorrector.loadDictionary();
 
 const studentModel = require("./models/students");
 const teacherModel = require("./models/teachers");
@@ -15,6 +23,7 @@ const formModel = require("./models/form");
 const stressModel = require("./models/stress");
 const anxietyModel = require("./models/anxiety");
 const depressionModel = require("./models/depression");
+const feedbackModel = require("./models/feedback");
 
 const AppError = require("./public/js/AppError");
 const wrapAsync = require("./public/js/wrapAsync");
@@ -64,16 +73,16 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 const d = new Date();
 
 function compare1(a, b) {
-      const sid1 = a.Sid;
-      const sid2 = b.Sid;
+    const sid1 = a.Sid;
+    const sid2 = b.Sid;
 
-      let comparison = 0;
-      if (sid1 > sid2) {
+    let comparison = 0;
+    if (sid1 > sid2) {
         comparison = 1;
-      }else if (sid1 < sid2) {
+    } else if (sid1 < sid2) {
         comparison = -1;
-      }
-      return comparison;
+    }
+    return comparison;
 }
 
 app.get("/Teacher/:Email/:Branch", wrapAsync(async function (req, res, next) {
@@ -97,18 +106,18 @@ app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next
     const yearform3 = await depressionModel.find({ Sid: sid, year: d.getFullYear() });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
-    const link = "/Teacher/" + req.params.Email + "/" + req.params.Branch+ "/" + req.params.Sid;
+    const link = "/Teacher/" + req.params.Email + "/" + req.params.Branch + "/" + req.params.Sid;
     const link1 = "/Teacher/" + req.params.Email + "/" + req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
     if (form1.length === 0) {
         throw new AppError('USER HAS NOT FILLED AY FORM YET', 404);
     }
-    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid,link:link, link1, yearform1, yearform2, yearform3 });
+    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid, link: link, link1, yearform1, yearform2, yearform3 });
 }))
 
-app.get("/Teacher/:Email/:Branch/:Sid/responseStress",wrapAsync( async function (req, res) {
+app.get("/Teacher/:Email/:Branch/:Sid/responseStress", wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
-    const form = await stressModel.find({ Sid: sid});
+    const form = await stressModel.find({ Sid: sid });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const branch = req.params.Branch;
@@ -139,10 +148,10 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", wrapAsync(async funct
     res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch });
 }))
 
-app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress",wrapAsync( async function (req, res) {
+app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress", wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     const id = req.params.id;
-    const form = await stressModel.find({ Sid: sid, id:id });
+    const form = await stressModel.find({ Sid: sid, id: id });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const branch = req.params.Branch;
@@ -154,7 +163,7 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress",wrapAsync( async funct
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseAnxiety", wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     const id = req.params.id;
-    const form = await anxietyModel.find({ Sid: sid, id:id  });
+    const form = await anxietyModel.find({ Sid: sid, id: id });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const branch = req.params.Branch;
@@ -166,7 +175,7 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseAnxiety", wrapAsync(async func
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseDepression", wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     const id = req.params.id;
-    const form = await depressionModel.find({ Sid: sid, id:id  });
+    const form = await depressionModel.find({ Sid: sid, id: id });
     const foundstudent = await studentModel.findOne({ Sid: sid });
     const email = req.params.Email;
     const branch = req.params.Branch;
@@ -255,6 +264,55 @@ app.post('/Student/:Sid/formdepression', wrapAsync(async function (req, res) {
     }
     const user = new depressionModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
     await user.save();
+    res.redirect("/Student/" + sid + "/feedback");
+}))
+
+app.get('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    res.render('feedback.ejs', { heading: "Feedback", sid, Student_details: foundstudent });
+}))
+
+app.post('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const obj = req.body;
+    // console.log(obj);
+    const id = sid + months[d.getMonth()] + d.getFullYear();
+    const check = await feedbackModel.findOne({ id: id });
+    if (check) {
+        throw new AppError('Form for this month is already filled');
+    }
+
+    let q = obj.feed;
+
+    const lexedReview = aposToLexForm(q);
+
+    // casing
+    const casedReview = lexedReview.toLowerCase();
+
+    // removing
+    const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');
+
+    // tokenize review
+    const { WordTokenizer } = natural;
+    const tokenizer = new WordTokenizer();
+    const tokenizedReview = tokenizer.tokenize(alphaOnlyReview);
+
+    // spell correction
+    tokenizedReview.forEach((word, index) => {
+        tokenizedReview[index] = spellCorrector.correct(word);
+    })
+
+    // remove stopwords
+    const filteredReview = SW.removeStopwords(tokenizedReview);
+
+    const { SentimentAnalyzer, PorterStemmer } = natural;
+    const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn');
+
+    const analysis = analyzer.getSentiment(filteredReview);
+
+    const feed = new feedbackModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: obj.feed, num: analysis });
+    await feed.save();
     res.redirect("/Student/" + sid + "/");
 }))
 
