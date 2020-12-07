@@ -101,6 +101,7 @@ app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next
     const form1 = await stressModel.find({ Sid: sid });
     const form2 = await anxietyModel.find({ Sid: sid });
     const form3 = await depressionModel.find({ Sid: sid });
+    const feed = await feedbackModel.find({ Sid: sid, month: months[d.getMonth()], year: d.getFullYear() });
     const yearform1 = await stressModel.find({ Sid: sid, year: d.getFullYear() });
     const yearform2 = await anxietyModel.find({ Sid: sid, year: d.getFullYear() });
     const yearform3 = await depressionModel.find({ Sid: sid, year: d.getFullYear() });
@@ -112,7 +113,7 @@ app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next
     if (form1.length === 0) {
         throw new AppError('USER HAS NOT FILLED AY FORM YET', 404);
     }
-    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid, link: link, link1, yearform1, yearform2, yearform3 });
+    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid, link: link, link1, yearform1, yearform2, yearform3, feed: feed });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/responseStress", wrapAsync(async function (req, res) {

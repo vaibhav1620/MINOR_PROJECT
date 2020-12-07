@@ -1,488 +1,531 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- Font Awesome File -->
-        <link rel="stylesheet" href="/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/style2.css">
-        <title></title>
-    </head>
-    <body>
-        <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
-            <div class="container">
-            	<a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40); font-weight:700;">H.I.M</a>
-            	<button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-align-justify"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item" role="presentation">
-                        	<a class="nav-link js-scroll-trigger" href="#" style="color: rgb(0,0,0); font-weight:500;text-transform: uppercase;"><%= Teacher_details.username %></a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                        	<a class="nav-link js-scroll-trigger" href="/tlogin" style="color: rgb(0,0,0); font-weight:500;text-transform: uppercase;">Logout</a>
-                        </li>
-                        <li class="nav-item" role="presentation"></li>
-                        <li class="nav-item" role="presentation"></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome File -->
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <title></title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: #ffffff;">
         <div class="container">
-            <div style="background: url(/img/1.jpg);background-repeat: no-repeat;background-size: cover;border-radius: 50px; margin-bottom:50px;">
+            <a class="navbar-brand js-scroll-trigger" href="/" style="color: rgb(238,75,40); font-weight:700;">H.I.M</a>
+            <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right"
+                type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-align-justify"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link js-scroll-trigger" href="#"
+                            style="color: rgb(0,0,0); font-weight:500;text-transform: uppercase;"><%= Teacher_details.username %></a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link js-scroll-trigger" href="/tlogin"
+                            style="color: rgb(0,0,0); font-weight:500;text-transform: uppercase;">Logout</a>
+                    </li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div
+            style="background: url(/img/1.jpg);background-repeat: no-repeat;background-size: cover;border-radius: 50px; margin-bottom:50px;">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="jumbotron" style="margin-left:25px">
+                        <h2>SID: <%= Form1[0].Sid %></h2>
+                        <hr class="my-4">
+                        <p>Username: <%= Student_details.username %></p>
+                        <p>Email: <%= Student_details.Email %></p>
+                        <p>Phone: <%= Student_details.Phone %></p>
+                        <p>Branch: <%= Student_details.Branch %></p>
+                        <p>Guardian Name: <%= Student_details.Guardian_name %></p>
+                        <p>Guardian Phone: <%= Student_details.Guardian_phone %></p>
+                        <a class="btn btn-lg" style="margin-top:25px;" href="<%=link1%>">BACK TO BRANCH VIEW</a>
+                    </div>
+                </div>
+                <div class="col-lg-8" style="margin-top:30px;">
+                    <a class="btn btn-lg" style="margin:15px;" href="<%=link%>/responseStress">SEE DETAILED
+                        RESPONSES</a>
+                    <canvas id="myChart"
+                        style="background: white; margin-bottom:20px;padding:30px;border-radius:50px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12"
+                style="background: white; border-radius: 50px; margin-bottom: 40px;padding-bottom:30px;">
+                <h1 style="text-align: center; margin-top: 10px;">INTERPRETATION OF SCORES</h1>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="jumbotron" style="margin-left:25px">
-                          <h2>SID: <%= Form1[0].Sid %></h2>
-                          <hr class="my-4">
-                          <p>Username: <%= Student_details.username %></p>
-                          <p>Email: <%= Student_details.Email %></p>
-                          <p>Phone: <%= Student_details.Phone %></p>
-                          <p>Branch: <%= Student_details.Branch %></p>
-                          <p>Guardian Name: <%= Student_details.Guardian_name %></p>
-                          <p>Guardian Phone: <%= Student_details.Guardian_phone %></p>
-                          <a class="btn btn-lg" style="margin-top:25px;" href="<%=link1%>">BACK TO BRANCH VIEW</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-8" style="margin-top:30px;">
-                        <a class="btn btn-lg" style="margin:15px;" href="<%=link%>/responseStress">SEE DETAILED RESPONSES</a>
-                        <canvas id="myChart" style="background: white; margin-bottom:20px;padding:30px;border-radius:50px;"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-12" style="background: white; border-radius: 50px; margin-bottom: 40px;padding-bottom:30px;">
-                    <h1 style="text-align: center; margin-top: 10px;">INTERPRETATION OF SCORES</h1>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <img src="/img/scale.png" style="width:100%;height:100%;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <canvas id="myChart2" style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
-                </div>
-                <div class="col-lg-6">
-                    <canvas id="myChart3" style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
-                </div>
-                <div class="col-lg-6">
-                    <canvas id="myChart4" style="background: white;padding:30px;border-radius:50px;"></canvas>
-                </div>
-            </div>
-            <div  style="background: white;margin-top:30px;border-radius:50px;">
-                <div>
-                    <div class="row justify-content-center">
-                        <h1 style="padding-top:10px;">ALL RESPONSES FILLED</h1>
-                    </div>
-                    <div class="row"  style="padding:30px;">
-                        <% for(var i=0;i<Form1.length;i++) { %>
-                            <div class="col-lg-2">
-                                <a class="btn" style="margin:15px;" href="<%=link%>/<%=Form1[i].id%>/responseStress"><%= Form1[i].month %> - <%= Form1[i].year %></a>
-                            </div>
-                        <% } %>
+                    <div class="col-lg-12">
+                        <img src="/img/scale.png" style="width:100%;height:100%;">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <canvas id="myChart2"
+                    style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="myChart3"
+                    style="background: white;margin-bottom:30px;padding:30px;border-radius:50px;"></canvas>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="myChart4" style="background: white;padding:30px;border-radius:50px;"></canvas>
+            </div>
+        </div>
+        
+        <div id="emoji" style="background: white;margin-top:30px;border-radius:50px;margin-bottom:30px;padding:30px">
+            <div>
+                <h1 style="text-align: center; padding-bottom: 30px;">FEELINGS TOWARDS COLLEGE</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-1">
+                    
+                </div>
+                <div class="col-lg-2">
+                    <i class="far fa-sad-tear" style="font-size:60px;color:rgb(200,200,200)"></i>
+                </div>
+                <div class="col-lg-2">
+                    <i class="far fa-frown" style="font-size:60px;color:rgb(200,200,200)"></i>
+                </div>
+                <div class="col-lg-2">
+                    <i class="far fa-meh" style="font-size:60px;color:rgb(200,200,200)"></i>
+                </div>
+                <div class="col-lg-2">
+                    <i class="far fa-smile" style="font-size:60px;color:rgb(200,200,200)"></i>
+                </div>
+                <div class="col-lg-2">
+                    <i class="far fa-laugh" style="font-size:60px;color:rgb(200,200,200)"></i>
+                </div>
+            </div>
+        </div>
 
-        <script>
-            let yearmap = new Map();
-            yearmap['January'] = 0;
-            yearmap['February'] = 1;
-            yearmap['March'] = 2;
-            yearmap['April'] = 3;
-            yearmap['May'] = 4;
-            yearmap['June'] = 5;
-            yearmap['July'] = 6;
-            yearmap['August'] = 7;
-            yearmap['September'] = 8;
-            yearmap['October'] = 9;
-            yearmap['November'] = 10;
-            yearmap['December'] = 11;
-            var score1 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
-            var score2 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
-            var score3 = [0,0,0,0,0,0,0,0,0,0,0,0,45]
-            const year1 = '<%- JSON.stringify(yearform1) %>';
-            const yearresponses1 = JSON.parse(year1);
-            const year2 = '<%- JSON.stringify(yearform2) %>';
-            const yearresponses2 = JSON.parse(year2);
-            const year3 = '<%- JSON.stringify(yearform3) %>';
-            const yearresponses3 = JSON.parse(year3);
-            for(var i=0;i<yearresponses1.length;i++)
-            {
-                var temp=0;
-                for(var j=0;j<14;j++)
-                {
-                    if(yearresponses1[i].response[j]==="op0")
-                    {
-                        temp+=0;
-                    }
-                    if(yearresponses1[i].response[j]==="op1")
-                    {
-                        temp+=1;
-                    }
-                    if(yearresponses1[i].response[j]==="op2")
-                    {
-                        temp+=2;
-                    }
-                    if(yearresponses1[i].response[j]==="op3")
-                    {
-                        temp+=3;
-                    }
+        <div style="background: white;margin-top:30px;border-radius:50px;margin-bottom:30px">
+            <div>
+                <div class="row justify-content-center">
+                    <h1 style="padding-top:10px;">ALL RESPONSES FILLED</h1>
+                </div>
+                <div class="row" style="padding:30px;">
+                    <% for(var i=0;i<Form1.length;i++) { %>
+                    <div class="col-lg-2">
+                        <a class="btn" style="margin:15px;"
+                            href="<%=link%>/<%=Form1[i].id%>/responseStress"><%= Form1[i].month %> -
+                            <%= Form1[i].year %></a>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let feed_val = 0;
+        const feed_data = '<%- JSON.stringify(feed) %>';
+        const feed_x = JSON.parse(feed_data);
+        
+        if(feed_x[0].num >= -0.5 && feed_x[0].num <= 0.5)
+        {
+            feed_val = 3;
+        }
+        else if(feed_x[0].num >= 0.5 && feed_x[0].num <= 2)
+        {
+            feed_val = 4;
+        }
+        else if(feed_x[0].num >= 2)
+        {
+            feed_val = 5;
+        }
+        else if(feed_x[0].num >= -2 && feed_x[0].num <= -0.5)
+        {
+            feed_val = 2;
+        }
+        else if(feed_x[0].num <= -2)
+        {
+            feed_val = 1;
+        }
+        const emo = document.querySelectorAll(".far");
+        
+        emo[feed_val-1].style.color = "rgb(238,75,40)";
+    </script>
+
+    <script>
+
+        let yearmap = new Map();
+        yearmap['January'] = 0;
+        yearmap['February'] = 1;
+        yearmap['March'] = 2;
+        yearmap['April'] = 3;
+        yearmap['May'] = 4;
+        yearmap['June'] = 5;
+        yearmap['July'] = 6;
+        yearmap['August'] = 7;
+        yearmap['September'] = 8;
+        yearmap['October'] = 9;
+        yearmap['November'] = 10;
+        yearmap['December'] = 11;
+        var score1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45]
+        var score2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45]
+        var score3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45]
+        const year1 = '<%- JSON.stringify(yearform1) %>';
+        const yearresponses1 = JSON.parse(year1);
+        const year2 = '<%- JSON.stringify(yearform2) %>';
+        const yearresponses2 = JSON.parse(year2);
+        const year3 = '<%- JSON.stringify(yearform3) %>';
+        const yearresponses3 = JSON.parse(year3);
+        for (var i = 0; i < yearresponses1.length; i++) {
+            var temp = 0;
+            for (var j = 0; j < 14; j++) {
+                if (yearresponses1[i].response[j] === "op0") {
+                    temp += 0;
                 }
-                score1[yearmap[yearresponses1[i].month]] = temp;
-            }
-            for(var i=0;i<yearresponses2.length;i++)
-            {
-                var temp1=0;
-                for(var j=0;j<14;j++)
-                {
-                    if(yearresponses2[i].response[j]==="op0")
-                    {
-                        temp1+=0;
-                    }
-                    if(yearresponses2[i].response[j]==="op1")
-                    {
-                        temp1+=1;
-                    }
-                    if(yearresponses2[i].response[j]==="op2")
-                    {
-                        temp1+=2;
-                    }
-                    if(yearresponses2[i].response[j]==="op3")
-                    {
-                        temp1+=3;
-                    }
+                if (yearresponses1[i].response[j] === "op1") {
+                    temp += 1;
                 }
-                score2[yearmap[yearresponses2[i].month]] = temp1;
-            }
-            for(var i=0;i<yearresponses3.length;i++)
-            {
-                var temp2=0;
-                for(var j=0;j<14;j++)
-                {
-                    if(yearresponses3[i].response[j]==="op0")
-                    {
-                        temp2+=0;
-                    }
-                    if(yearresponses3[i].response[j]==="op1")
-                    {
-                        temp2+=1;
-                    }
-                    if(yearresponses3[i].response[j]==="op2")
-                    {
-                        temp2+=2;
-                    }
-                    if(yearresponses3[i].response[j]==="op3")
-                    {
-                        temp2+=3;
-                    }
+                if (yearresponses1[i].response[j] === "op2") {
+                    temp += 2;
                 }
-                score3[yearmap[yearresponses3[i].month]] = temp2;
+                if (yearresponses1[i].response[j] === "op3") {
+                    temp += 3;
+                }
             }
+            score1[yearmap[yearresponses1[i].month]] = temp;
+        }
+        for (var i = 0; i < yearresponses2.length; i++) {
+            var temp1 = 0;
+            for (var j = 0; j < 14; j++) {
+                if (yearresponses2[i].response[j] === "op0") {
+                    temp1 += 0;
+                }
+                if (yearresponses2[i].response[j] === "op1") {
+                    temp1 += 1;
+                }
+                if (yearresponses2[i].response[j] === "op2") {
+                    temp1 += 2;
+                }
+                if (yearresponses2[i].response[j] === "op3") {
+                    temp1 += 3;
+                }
+            }
+            score2[yearmap[yearresponses2[i].month]] = temp1;
+        }
+        for (var i = 0; i < yearresponses3.length; i++) {
+            var temp2 = 0;
+            for (var j = 0; j < 14; j++) {
+                if (yearresponses3[i].response[j] === "op0") {
+                    temp2 += 0;
+                }
+                if (yearresponses3[i].response[j] === "op1") {
+                    temp2 += 1;
+                }
+                if (yearresponses3[i].response[j] === "op2") {
+                    temp2 += 2;
+                }
+                if (yearresponses3[i].response[j] === "op3") {
+                    temp2 += 3;
+                }
+            }
+            score3[yearmap[yearresponses3[i].month]] = temp2;
+        }
 
 
-            const responses = '<%- JSON.stringify(Form1[Form1.length-1].response) %>';
-            const student_responses = JSON.parse(responses);
-            const responses2 = '<%- JSON.stringify(Form2[Form2.length-1].response) %>';
-            const student_responses2 = JSON.parse(responses2);
-            const responses3 = '<%- JSON.stringify(Form3[Form3.length-1].response) %>';
-            const student_responses3 = JSON.parse(responses3);
-            const temp_data1 = [];
-            const temp_data2 = [];
-            const temp_data3 = [];
-            for(var i = 0;i<student_responses.length;i++)
-            {
-                if(student_responses[i]==="op0")
-                {
-                    temp_data1.push(0);
-                }
-                if(student_responses[i]==="op1")
-                {
-                    temp_data1.push(1);
-                }
-                if(student_responses[i]==="op2")
-                {
-                    temp_data1.push(2);
-                }
-                if(student_responses[i]==="op3")
-                {
-                    temp_data1.push(3);
-                }
+        const responses = '<%- JSON.stringify(Form1[Form1.length-1].response) %>';
+        const student_responses = JSON.parse(responses);
+        const responses2 = '<%- JSON.stringify(Form2[Form2.length-1].response) %>';
+        const student_responses2 = JSON.parse(responses2);
+        const responses3 = '<%- JSON.stringify(Form3[Form3.length-1].response) %>';
+        const student_responses3 = JSON.parse(responses3);
+        const temp_data1 = [];
+        const temp_data2 = [];
+        const temp_data3 = [];
+        for (var i = 0; i < student_responses.length; i++) {
+            if (student_responses[i] === "op0") {
+                temp_data1.push(0);
             }
-            for(var i = 0;i<student_responses2.length;i++)
-            {
-                if(student_responses2[i]==="op0")
-                {
-                    temp_data2.push(0);
-                }
-                if(student_responses2[i]==="op1")
-                {
-                    temp_data2.push(1);
-                }
-                if(student_responses2[i]==="op2")
-                {
-                    temp_data2.push(2);
-                }
-                if(student_responses2[i]==="op3")
-                {
-                    temp_data2.push(3);
-                }
+            if (student_responses[i] === "op1") {
+                temp_data1.push(1);
             }
-            for(var i = 0;i<student_responses3.length;i++)
-            {
-                if(student_responses3[i]==="op0")
-                {
-                    temp_data3.push(0);
-                }
-                if(student_responses3[i]==="op1")
-                {
-                    temp_data3.push(1);
-                }
-                if(student_responses3[i]==="op2")
-                {
-                    temp_data3.push(2);
-                }
-                if(student_responses3[i]==="op3")
-                {
-                    temp_data3.push(3);
-                }
+            if (student_responses[i] === "op2") {
+                temp_data1.push(2);
             }
-            // var score1=0;
-            // var score2=0;
-            // var score3=0;
-            // for(var i=0;i<14;i++)
-            // {
-            //     score1 += temp_data1[i];
-            //     score2 += temp_data2[i];
-            //     score3 += temp_data3[i];
-            // }
-            const label = [];
-            for(var i=0;i<14;i++){
-                label.push(i+1);
+            if (student_responses[i] === "op3") {
+                temp_data1.push(3);
             }
+        }
+        for (var i = 0; i < student_responses2.length; i++) {
+            if (student_responses2[i] === "op0") {
+                temp_data2.push(0);
+            }
+            if (student_responses2[i] === "op1") {
+                temp_data2.push(1);
+            }
+            if (student_responses2[i] === "op2") {
+                temp_data2.push(2);
+            }
+            if (student_responses2[i] === "op3") {
+                temp_data2.push(3);
+            }
+        }
+        for (var i = 0; i < student_responses3.length; i++) {
+            if (student_responses3[i] === "op0") {
+                temp_data3.push(0);
+            }
+            if (student_responses3[i] === "op1") {
+                temp_data3.push(1);
+            }
+            if (student_responses3[i] === "op2") {
+                temp_data3.push(2);
+            }
+            if (student_responses3[i] === "op3") {
+                temp_data3.push(3);
+            }
+        }
+        // var score1=0;
+        // var score2=0;
+        // var score3=0;
+        // for(var i=0;i<14;i++)
+        // {
+        //     score1 += temp_data1[i];
+        //     score2 += temp_data2[i];
+        //     score3 += temp_data3[i];
+        // }
+        const label = [];
+        for (var i = 0; i < 14; i++) {
+            label.push(i + 1);
+        }
 
-            var ctx = document.getElementById('myChart');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: label,
-                    datasets: [{
-                        label: 'Stress Responses',
-                        data: temp_data1,
-                        backgroundColor: [
-                            'rgba(255, 244, 2, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(238, 75, 40, 1)',
-                        ],
-                        borderWidth: 2,
-                    },
-                    {
-                        label: 'Anxiety Responses',
-                        data: temp_data2,
-                        backgroundColor: [
-                            'rgba(238,75,21,0.2)',
-                        ],
-                        borderColor: [
-                            'black',
-                        ],
-                        borderWidth: 2,
-                    },
-                    {
-                        label: 'Depression Responses',
-                        data: temp_data3,
-                        backgroundColor: [
-                            'rgba(127, 344, 60, 0.2)',
-                        ],
-                        borderColor: [
-                            'blue',
-                        ],
-                        borderWidth: 2,
-                    }]
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Stress Responses',
+                    data: temp_data1,
+                    backgroundColor: [
+                        'rgba(255, 244, 2, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(238, 75, 40, 1)',
+                    ],
+                    borderWidth: 2,
                 },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-
-            var ctx2 = document.getElementById('myChart2');
-            var myChart2 = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-                    datasets: [{
-                        label: 'Stress Form',
-                        data: score1,
-                        backgroundColor: [
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                        ],
-                        borderColor: [
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-
-                        ],
-                        borderWidth: 2,
-                    }]
+                {
+                    label: 'Anxiety Responses',
+                    data: temp_data2,
+                    backgroundColor: [
+                        'rgba(238,75,21,0.2)',
+                    ],
+                    borderColor: [
+                        'black',
+                    ],
+                    borderWidth: 2,
                 },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-
-            var ctx3 = document.getElementById('myChart3');
-            var myChart3 = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                    labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-                    datasets: [{
-                        label: 'Anxiety Form',
-                        data: score2,
-                        backgroundColor: [
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                        ],
-                        borderColor: [
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                        ],
-                        borderWidth: 2,
+                {
+                    label: 'Depression Responses',
+                    data: temp_data3,
+                    backgroundColor: [
+                        'rgba(127, 344, 60, 0.2)',
+                    ],
+                    borderColor: [
+                        'blue',
+                    ],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
                 }
-            });
+            }
+        });
 
-            var ctx4 = document.getElementById('myChart4');
-            var myChart4 = new Chart(ctx4, {
-                type: 'bar',
-                data: {
-                    labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-                    datasets: [{
-                        label: 'Depression Form',
-                        data: score3,
-                        backgroundColor: [
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                            'rgba(255, 244, 2, 2)',
-                        ],
-                        borderColor: [
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                            'rgba(238, 75, 40, 1)',
-                        ],
-                        borderWidth: 2,
+        var ctx2 = document.getElementById('myChart2');
+        var myChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                datasets: [{
+                    label: 'Stress Form',
+                    data: score1,
+                    backgroundColor: [
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                    ],
+                    borderColor: [
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+
+                    ],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
                 }
-            });
-        </script>
+            }
+        });
 
-            <script src="/js/validation.js" charset="utf-8"></script>
-            <script src="/js/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
-            <script src="/js/bs-init.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-            <script src="/js/creative.js"></script>
-    </body>
+        var ctx3 = document.getElementById('myChart3');
+        var myChart3 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                datasets: [{
+                    label: 'Anxiety Form',
+                    data: score2,
+                    backgroundColor: [
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                    ],
+                    borderColor: [
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                    ],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx4 = document.getElementById('myChart4');
+        var myChart4 = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                datasets: [{
+                    label: 'Depression Form',
+                    data: score3,
+                    backgroundColor: [
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                        'rgba(255, 244, 2, 2)',
+                    ],
+                    borderColor: [
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                        'rgba(238, 75, 40, 1)',
+                    ],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+
+    <script src="/js/validation.js" charset="utf-8"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="/js/creative.js"></script>
+</body>
+
 </html>
