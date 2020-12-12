@@ -209,20 +209,42 @@ app.get('/Student/:Sid/formstress', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     // console.log(sid);
     const foundstudent = await studentModel.findOne({ Sid: sid });
-    const questions = await formModel.find({ category: 's' });
-    res.render('question.ejs', { questions, heading: "Form 1", sid, Student_details: foundstudent });
+    const questions_mcq = await formModel.find({ category: 's', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 's', variant: 'text' });
+    res.render('question.ejs', { questions_text, questions_mcq, heading: "Form 1", sid, Student_details: foundstudent });
 }))
 
 app.post('/Student/:Sid/formstress', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     const obj = req.body;
+    var mcq = [];
+    var text = [];
+    mcq.push(obj.ques1);
+    mcq.push(obj.ques2);
+    mcq.push(obj.ques3);
+    mcq.push(obj.ques4);
+    mcq.push(obj.ques5);
+    mcq.push(obj.ques6);
+    mcq.push(obj.ques7);
+    mcq.push(obj.ques8);
+
+    text.push(obj.text0);
+    text.push(obj.text1);
+    text.push(obj.text2);
+
+    var value_array = [];
+    for (let i = 0; i < text.length; i++) {
+        value_array.push(NLP(text[i]));
+    }
+
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await stressModel.findOne({ id: id });
     if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new stressModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
+    const user = new stressModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response_mcq: mcq, response_text: text, value_text: value_array });
     await user.save();
+    // console.log(typeof value_array);
     res.redirect("/Student/" + sid + "/formanxiety");
 }))
 
@@ -230,19 +252,40 @@ app.get('/Student/:Sid/formanxiety', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     // console.log(sid);
     const foundstudent = await studentModel.findOne({ Sid: sid });
-    const questions = await formModel.find({ category: 'a' });
-    res.render('question.ejs', { questions, heading: "Form 2", sid, Student_details: foundstudent });
+    const questions_mcq = await formModel.find({ category: 'a', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'a', variant: 'text' });
+    res.render('question.ejs', { questions_text, questions_mcq, heading: "Form 2", sid, Student_details: foundstudent });
 }))
 
 app.post('/Student/:Sid/formanxiety', wrapAsync(async function (req, res, next) {
     const sid = req.params.Sid;
     const obj = req.body;
+    var mcq = [];
+    var text = [];
+    mcq.push(obj.ques1);
+    mcq.push(obj.ques2);
+    mcq.push(obj.ques3);
+    mcq.push(obj.ques4);
+    mcq.push(obj.ques5);
+    mcq.push(obj.ques6);
+    mcq.push(obj.ques7);
+    mcq.push(obj.ques8);
+
+    text.push(obj.text0);
+    text.push(obj.text1);
+    text.push(obj.text2);
+
+    var value_array = [];
+    for (let i = 0; i < text.length; i++) {
+        value_array.push(NLP(text[i]));
+    }
+
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await anxietyModel.findOne({ id: id });
     if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new anxietyModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
+    const user = new anxietyModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response_mcq: mcq, response_text: text, value_text: value_array });
     await user.save();
     res.redirect("/Student/" + sid + "/formdepression");
 }))
@@ -251,19 +294,40 @@ app.get('/Student/:Sid/formdepression', wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     // console.log(sid);
     const foundstudent = await studentModel.findOne({ Sid: sid });
-    const questions = await formModel.find({ category: 'd' });
-    res.render('question.ejs', { questions, heading: "Form 3", sid, Student_details: foundstudent });
+    const questions_mcq = await formModel.find({ category: 'd', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'd', variant: 'text' });
+    res.render('question.ejs', { questions_text, questions_mcq, heading: "Form 3", sid, Student_details: foundstudent });
 }))
 
 app.post('/Student/:Sid/formdepression', wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     const obj = req.body;
+    var mcq = [];
+    var text = [];
+    mcq.push(obj.ques1);
+    mcq.push(obj.ques2);
+    mcq.push(obj.ques3);
+    mcq.push(obj.ques4);
+    mcq.push(obj.ques5);
+    mcq.push(obj.ques6);
+    mcq.push(obj.ques7);
+    mcq.push(obj.ques8);
+
+    text.push(obj.text0);
+    text.push(obj.text1);
+    text.push(obj.text2);
+
+    var value_array = [];
+    for (let i = 0; i < text.length; i++) {
+        value_array.push(NLP(text[i]));
+    }
+
     const id = sid + months[d.getMonth()] + d.getFullYear();
     const check = await depressionModel.findOne({ id: id });
     if (check) {
         throw new AppError('Form for this month is already filled');
     }
-    const user = new depressionModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: Object.values(obj) });
+    const user = new depressionModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response_mcq: mcq, response_text: text, value_text: value_array });
     await user.save();
     res.redirect("/Student/" + sid + "/feedback");
 }))
@@ -274,18 +338,7 @@ app.get('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
     res.render('feedback.ejs', { heading: "Feedback", sid, Student_details: foundstudent });
 }))
 
-app.post('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
-    const sid = req.params.Sid;
-    const obj = req.body;
-    // console.log(obj);
-    const id = sid + months[d.getMonth()] + d.getFullYear();
-    const check = await feedbackModel.findOne({ id: id });
-    if (check) {
-        throw new AppError('Form for this month is already filled');
-    }
-
-    let q = obj.feed;
-
+function NLP(q) {
     const lexedReview = aposToLexForm(q);
 
     // casing
@@ -311,6 +364,22 @@ app.post('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
     const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn');
 
     const analysis = analyzer.getSentiment(filteredReview);
+    return analysis;
+}
+
+app.post('/Student/:Sid/feedback', wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const obj = req.body;
+    // console.log(obj);
+    const id = sid + months[d.getMonth()] + d.getFullYear();
+    const check = await feedbackModel.findOne({ id: id });
+    if (check) {
+        throw new AppError('Form for this month is already filled');
+    }
+    // console.log(obj);
+    var q = obj.feed;
+
+    const analysis = NLP(q);
 
     const feed = new feedbackModel({ Sid: sid, id: id, month: months[d.getMonth()], year: d.getFullYear(), response: obj.feed, num: analysis });
     await feed.save();

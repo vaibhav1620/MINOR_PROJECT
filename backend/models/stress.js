@@ -18,10 +18,19 @@ const stressSchema = new mongoose.Schema({
         type: String,
         required: true
     }, 
-    response: {
+    response_mcq: {
         type: [String],
         required: true,
-        default: ['op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0']
+        default: ['op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0', 'op0']
+    },
+    response_text: {
+        type: [String],
+        required: true,
+        default: ["", "", ""]
+    },
+    value_text: {
+        type: [Number],
+        required: true
     }
 });
 
