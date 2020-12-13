@@ -95,14 +95,14 @@
                 <canvas id="myChart4" style="background: white;padding:30px;border-radius:50px;"></canvas>
             </div>
         </div>
-        
+
         <div id="emoji" style="background: white;margin-top:30px;border-radius:50px;margin-bottom:30px;padding:30px">
             <div>
                 <h1 style="text-align: center; padding-bottom: 30px;">FEELINGS TOWARDS COLLEGE</h1>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-1">
-                    
+
                 </div>
                 <div class="col-lg-2">
                     <i class="far fa-sad-tear" style="font-size:60px;color:rgb(200,200,200)"></i>
@@ -143,8 +143,9 @@
     <script>
         let feed_val = 0;
         const feed_data = '<%- JSON.stringify(feed) %>';
-        const feed_x = JSON.parse(feed_data);
-        
+        const finalfeed = feed_data.replace(/\s/g, '');
+        const feed_x = JSON.parse(finalfeed);
+
         if(feed_x[0].num >= -0.5 && feed_x[0].num <= 0.5)
         {
             feed_val = 3;
@@ -166,7 +167,7 @@
             feed_val = 1;
         }
         const emo = document.querySelectorAll(".far");
-        
+
         emo[feed_val-1].style.color = "rgb(238,75,40)";
     </script>
 
@@ -189,73 +190,92 @@
         var score2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45]
         var score3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45]
         const year1 = '<%- JSON.stringify(yearform1) %>';
-        const yearresponses1 = JSON.parse(year1);
+        const finalyear1 = year1.replace(/\s/g, '');
+        const yearresponses1 = JSON.parse(finalyear1);
         const year2 = '<%- JSON.stringify(yearform2) %>';
-        const yearresponses2 = JSON.parse(year2);
+        const finalyear2 = year2.replace(/\s/g, '');
+        const yearresponses2 = JSON.parse(finalyear2);
         const year3 = '<%- JSON.stringify(yearform3) %>';
-        const yearresponses3 = JSON.parse(year3);
+        const finalyear3 = year3.replace(/\s/g, '');
+        const yearresponses3 = JSON.parse(finalyear3);
         for (var i = 0; i < yearresponses1.length; i++) {
             var temp = 0;
-            for (var j = 0; j < 14; j++) {
-                if (yearresponses1[i].response[j] === "op0") {
+            for (var j = 0; j < 8; j++) {
+                if (yearresponses1[i].response_mcq[j] === "op0") {
                     temp += 0;
                 }
-                if (yearresponses1[i].response[j] === "op1") {
+                if (yearresponses1[i].response_mcq[j] === "op1") {
                     temp += 1;
                 }
-                if (yearresponses1[i].response[j] === "op2") {
+                if (yearresponses1[i].response_mcq[j] === "op2") {
                     temp += 2;
                 }
-                if (yearresponses1[i].response[j] === "op3") {
+                if (yearresponses1[i].response_mcq[j] === "op3") {
                     temp += 3;
                 }
+            }
+            console.log(temp);
+            for(var j = 0; j < 3; j++) {
+                temp += yearresponses1[i].value_text[j];
             }
             score1[yearmap[yearresponses1[i].month]] = temp;
         }
         for (var i = 0; i < yearresponses2.length; i++) {
             var temp1 = 0;
-            for (var j = 0; j < 14; j++) {
-                if (yearresponses2[i].response[j] === "op0") {
+            for (var j = 0; j < 8; j++) {
+                if (yearresponses2[i].response_mcq[j] === "op0") {
                     temp1 += 0;
                 }
-                if (yearresponses2[i].response[j] === "op1") {
+                if (yearresponses2[i].response_mcq[j] === "op1") {
                     temp1 += 1;
                 }
-                if (yearresponses2[i].response[j] === "op2") {
+                if (yearresponses2[i].response_mcq[j] === "op2") {
                     temp1 += 2;
                 }
-                if (yearresponses2[i].response[j] === "op3") {
+                if (yearresponses2[i].response_mcq[j] === "op3") {
                     temp1 += 3;
                 }
+            }
+            for(var j = 0; j < 3; j++) {
+                temp1 += yearresponses2[i].value_text[j];
             }
             score2[yearmap[yearresponses2[i].month]] = temp1;
         }
         for (var i = 0; i < yearresponses3.length; i++) {
             var temp2 = 0;
-            for (var j = 0; j < 14; j++) {
-                if (yearresponses3[i].response[j] === "op0") {
+            for (var j = 0; j < 8; j++) {
+                if (yearresponses3[i].response_mcq[j] === "op0") {
                     temp2 += 0;
                 }
-                if (yearresponses3[i].response[j] === "op1") {
+                if (yearresponses3[i].response_mcq[j] === "op1") {
                     temp2 += 1;
                 }
-                if (yearresponses3[i].response[j] === "op2") {
+                if (yearresponses3[i].response_mcq[j] === "op2") {
                     temp2 += 2;
                 }
-                if (yearresponses3[i].response[j] === "op3") {
+                if (yearresponses3[i].response_mcq[j] === "op3") {
                     temp2 += 3;
                 }
+            }
+            for(var j = 0; j < 3; j++) {
+                temp2 += yearresponses3[i].value_text[j];
             }
             score3[yearmap[yearresponses3[i].month]] = temp2;
         }
 
 
-        const responses = '<%- JSON.stringify(Form1[Form1.length-1].response) %>';
+        const responses = '<%- JSON.stringify(Form1[Form1.length-1].response_mcq) %>';
         const student_responses = JSON.parse(responses);
-        const responses2 = '<%- JSON.stringify(Form2[Form2.length-1].response) %>';
+        const responses2 = '<%- JSON.stringify(Form2[Form2.length-1].response_mcq) %>';
         const student_responses2 = JSON.parse(responses2);
-        const responses3 = '<%- JSON.stringify(Form3[Form3.length-1].response) %>';
+        const responses3 = '<%- JSON.stringify(Form3[Form3.length-1].response_mcq) %>';
         const student_responses3 = JSON.parse(responses3);
+        const responses_text = '<%- JSON.stringify(Form1[Form1.length-1].value_text) %>';
+        const student_responses_text = JSON.parse(responses_text);
+        const responses2_text = '<%- JSON.stringify(Form2[Form2.length-1].value_text) %>';
+        const student_responses2_text = JSON.parse(responses2_text);
+        const responses3_text = '<%- JSON.stringify(Form3[Form3.length-1].value_text) %>';
+        const student_responses3_text = JSON.parse(responses3_text);
         const temp_data1 = [];
         const temp_data2 = [];
         const temp_data3 = [];
@@ -301,6 +321,12 @@
                 temp_data3.push(3);
             }
         }
+        for(var i = 0; i < 3; i++)
+        {
+            temp_data1.push(student_responses_text[i]);
+            temp_data2.push(student_responses2_text[i]);
+            temp_data3.push(student_responses3_text[i]);
+        }
         // var score1=0;
         // var score2=0;
         // var score3=0;
@@ -311,7 +337,7 @@
         //     score3 += temp_data3[i];
         // }
         const label = [];
-        for (var i = 0; i < 14; i++) {
+        for (var i = 0; i < 11; i++) {
             label.push(i + 1);
         }
 

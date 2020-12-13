@@ -55,23 +55,63 @@
           <hr class="style14 my-4">
           <% let arr = ["Never", "Sometimes", "Often", "Almost Always"]; %>
           <% let obj %>
-          <% for (let i=0; i<questions.length; i++) { %>
-          <p>Ques <%= i+1 %>) <%= questions[i].question %> </p>
+          <% for (let i=0; i<3; i++) { %>
+          <p>Ques <%= i+1 %>) <%= questions_mcq[i].question %> </p>
           <% let ans = 0 %>
-          <% if(form[form.length-1].response[i] === "op0") { %>
+          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
           <% ans = 0 %>
           <% } %>
-          <% if(form[form.length-1].response[i] === "op1") { %>
+          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
           <% ans = 1 %>
           <% } %>
-          <% if(form[form.length-1].response[i] === "op2") { %>
+          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
           <% ans = 2 %>
           <% } %>
-          <% if(form[form.length-1].response[i] === "op3") { %>
+          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
           <% ans = 3 %>
           <% } %>
           <p>Ans <%= i+1 %>) <%= arr[ans] %></p>
           <% } %>
+            <p>Ques <%= 4 %>) <%= questions_text[0].question %> </p>
+            <p>Ans <%= 4 %>) <%= form[form.length-1].response_text[0] %></p>
+          <% for (let i=3; i<6; i++) { %>
+          <p>Ques <%= i+2 %>) <%= questions_mcq[i].question %> </p>
+          <% let ans = 0 %>
+          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
+          <% ans = 0 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
+          <% ans = 1 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
+          <% ans = 2 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
+          <% ans = 3 %>
+          <% } %>
+          <p>Ans <%= i+2 %>) <%= arr[ans] %></p>
+          <% } %>
+            <p>Ques <%= 8 %>) <%= questions_text[1].question %> </p>
+            <p>Ans <%= 8 %>) <%= form[form.length-1].response_text[1] %></p>
+          <% for (let i=6; i<8; i++) { %>
+          <p>Ques <%= i+3 %>) <%= questions_mcq[i].question %> </p>
+          <% let ans = 0 %>
+          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
+          <% ans = 0 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
+          <% ans = 1 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
+          <% ans = 2 %>
+          <% } %>
+          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
+          <% ans = 3 %>
+          <% } %>
+          <p>Ans <%= i+3 %>) <%= arr[ans] %></p>
+          <% } %>
+            <p>Ques <%= 11 %>) <%= questions_text[2].question %> </p>
+            <p>Ans <%= 11 %>) <%= form[form.length-1].response_text[2] %></p>
           <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>">Back</a>
           <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseAnxiety">Next</a>
         </div>

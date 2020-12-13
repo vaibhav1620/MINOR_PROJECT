@@ -113,7 +113,7 @@ app.get("/Teacher/:Email/:Branch/:Sid", wrapAsync(async function (req, res, next
     if (form1.length === 0) {
         throw new AppError('USER HAS NOT FILLED AY FORM YET', 404);
     }
-    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid, link: link, link1, yearform1, yearform2, yearform3, feed: feed });
+    res.render('studentResponses.ejs', { Form1: form1, Form2: form2, Form3: form3, Student_details: foundstudent, Teacher_details: foundteacher, Sid: sid, link: link, link1, yearform1, yearform2, yearform3, feed });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/responseStress", wrapAsync(async function (req, res) {
@@ -123,8 +123,10 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseStress", wrapAsync(async function 
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 's' });
-    res.render("responseStress.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid, email, branch });
+    const questions_mcq = await formModel.find({ category: 's', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 's', variant: 'text' });
+    console.log(form);
+    res.render("responseStress.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions_mcq, questions_text, sid, email, branch });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/responseAnxiety", wrapAsync(async function (req, res) {
@@ -134,8 +136,9 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseAnxiety", wrapAsync(async function
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'a' });
-    res.render("responseAnxiety.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions, sid, email, branch });
+    const questions_mcq = await formModel.find({ category: 'a', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'a', variant: 'text' });
+    res.render("responseAnxiety.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions_mcq, questions_text, sid, email, branch });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", wrapAsync(async function (req, res) {
@@ -145,8 +148,9 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", wrapAsync(async funct
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'd' });
-    res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch });
+    const questions_mcq = await formModel.find({ category: 'd', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'd', variant: 'text' });
+    res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions_mcq, questions_text, sid, email, branch });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress", wrapAsync(async function (req, res) {
@@ -157,8 +161,9 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress", wrapAsync(async funct
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 's' });
-    res.render("responseStress1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions, sid, email, branch, id });
+    const questions_mcq = await formModel.find({ category: 's', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 's', variant: 'text' });
+    res.render("responseStress1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 1", questions_mcq, questions_text, sid, email, branch, id });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseAnxiety", wrapAsync(async function (req, res) {
@@ -169,8 +174,9 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseAnxiety", wrapAsync(async func
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'a' });
-    res.render("responseAnxiety1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions, sid, email, branch, id });
+    const questions_mcq = await formModel.find({ category: 'a', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'a', variant: 'text' });
+    res.render("responseAnxiety1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 2", questions_mcq, questions_text, sid, email, branch, id });
 }))
 
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseDepression", wrapAsync(async function (req, res) {
@@ -181,8 +187,9 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseDepression", wrapAsync(async f
     const email = req.params.Email;
     const branch = req.params.Branch;
     const foundteacher = await teacherModel.findOne({ Email: email });
-    const questions = await formModel.find({ category: 'd' });
-    res.render("responseDepression1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions, sid, email, branch, id });
+    const questions_mcq = await formModel.find({ category: 'd', variant: 'mcq' });
+    const questions_text = await formModel.find({ category: 'd', variant: 'text' });
+    res.render("responseDepression1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions_mcq, questions_text, sid, email, branch, id });
 }))
 
 app.get('/Student/:Sid', wrapAsync(async function (req, res, next) {
