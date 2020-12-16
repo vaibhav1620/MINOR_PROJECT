@@ -19,7 +19,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
   <link rel="stylesheet" href="/css/ResponseCSS.css">
-  <title><%= heading %> Responses</title>
+  <title>
+    <%= heading %> Responses
+  </title>
 </head>
 
 <body>
@@ -34,7 +36,9 @@
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item" role="presentation">
             <a class="nav-link js-scroll-trigger" href="#"
-              style="color: rgb(0,0,0); font-weight:700;text-transform: uppercase;"><%= Teacher_details.username %></a>
+              style="color: rgb(0,0,0); font-weight:700;text-transform:uppecase;">
+              <%= Teacher_details.username %>
+            </a>
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link js-scroll-trigger" href="/tlogin" style="color: rgb(0,0,0); font-weight:700;">Logout</a>
@@ -50,70 +54,17 @@
     <section class="container-fluid px-0">
       <div class="row">
         <div id="jumbo" class="jumbotron col-12">
-          <h1 class="display-4"><%= heading %></h1>
+          <h1 class="display-4">
+            <%= heading %>
+          </h1>
           <p class="lead">Responses of SID: <%= sid %> .</p>
           <hr class="style14 my-4">
-          <% let arr = ["Never", "Sometimes", "Often", "Almost Always"]; %>
-          <% let obj %>
-          <% for (let i=0; i<3; i++) { %>
-          <p>Ques <%= i+1 %>) <%= questions_mcq[i].question %> </p>
-          <% let ans = 0 %>
-          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
-          <% ans = 0 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
-          <% ans = 1 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
-          <% ans = 2 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
-          <% ans = 3 %>
-          <% } %>
-          <p>Ans <%= i+1 %>) <%= arr[ans] %></p>
-          <% } %>
-            <p>Ques <%= 4 %>) <%= questions_text[0].question %> </p>
-            <p>Ans <%= 4 %>) <%= form[form.length-1].response_text[0] %></p>
-          <% for (let i=3; i<6; i++) { %>
-          <p>Ques <%= i+2 %>) <%= questions_mcq[i].question %> </p>
-          <% let ans = 0 %>
-          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
-          <% ans = 0 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
-          <% ans = 1 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
-          <% ans = 2 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
-          <% ans = 3 %>
-          <% } %>
-          <p>Ans <%= i+2 %>) <%= arr[ans] %></p>
-          <% } %>
-            <p>Ques <%= 8 %>) <%= questions_text[1].question %> </p>
-            <p>Ans <%= 8 %>) <%= form[form.length-1].response_text[1] %></p>
-          <% for (let i=6; i<8; i++) { %>
-          <p>Ques <%= i+3 %>) <%= questions_mcq[i].question %> </p>
-          <% let ans = 0 %>
-          <% if(form[form.length-1].response_mcq[i] === "op0") { %>
-          <% ans = 0 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op1") { %>
-          <% ans = 1 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op2") { %>
-          <% ans = 2 %>
-          <% } %>
-          <% if(form[form.length-1].response_mcq[i] === "op3") { %>
-          <% ans = 3 %>
-          <% } %>
-          <p>Ans <%= i+3 %>) <%= arr[ans] %></p>
-          <% } %>
-            <p>Ques <%= 11 %>) <%= questions_text[2].question %> </p>
-            <p>Ans <%= 11 %>) <%= form[form.length-1].response_text[2] %></p>
-          <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseAnxiety">Back</a>
-          <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/feedbackResponse">Next</a>
+          <p>Ques: What do you feel about your college?</p>
+          <p>Ans: <%= feed[0].response %>  </p>
+          <a class="btn btn-lg" role="button"
+            href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>/responseDepression">Back</a>
+          <a class="btn btn-lg" role="button" href="/Teacher/<%= email %>/<%= branch %>/<%= sid %>">Home</a>
+
         </div>
       </div>
     </section>

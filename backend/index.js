@@ -153,6 +153,16 @@ app.get("/Teacher/:Email/:Branch/:Sid/responseDepression", wrapAsync(async funct
     res.render("responseDepression.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions_mcq, questions_text, sid, email, branch });
 }))
 
+app.get("/Teacher/:Email/:Branch/:Sid/feedbackResponse", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const feed = await feedbackModel.find({ Sid: sid});
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    res.render("feedbackResponse.ejs", { feed: feed, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Feedback", sid, email, branch });
+}))
+
 app.get("/Teacher/:Email/:Branch/:Sid/:id/responseStress", wrapAsync(async function (req, res) {
     const sid = req.params.Sid;
     const id = req.params.id;
@@ -190,6 +200,17 @@ app.get("/Teacher/:Email/:Branch/:Sid/:id/responseDepression", wrapAsync(async f
     const questions_mcq = await formModel.find({ category: 'd', variant: 'mcq' });
     const questions_text = await formModel.find({ category: 'd', variant: 'text' });
     res.render("responseDepression1.ejs", { form: form, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Form 3", questions_mcq, questions_text, sid, email, branch, id });
+}))
+
+app.get("/Teacher/:Email/:Branch/:Sid/:id/feedbackResponse", wrapAsync(async function (req, res) {
+    const sid = req.params.Sid;
+    const id = req.params.id;
+    const feed = await feedbackModel.find({ Sid: sid, id: id });
+    const foundstudent = await studentModel.findOne({ Sid: sid });
+    const email = req.params.Email;
+    const branch = req.params.Branch;
+    const foundteacher = await teacherModel.findOne({ Email: email });
+    res.render("feedbackResponse1.ejs", { feed: feed, Student_details: foundstudent, Teacher_details: foundteacher, heading: "Feedback", sid, email, branch, id });
 }))
 
 app.get('/Student/:Sid', wrapAsync(async function (req, res, next) {
